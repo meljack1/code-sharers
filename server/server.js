@@ -1,16 +1,19 @@
 const express = require("express");
 const {ApolloServer} = require("apollo-server-express");
 const path = require("path");
-//Add in house dependencies here typedefs, db, authmiddleware
 
+//Add in house dependencies here typedefs, db, authmiddleware
 const db = require("./config/connection")
+const {typeDefs, resolvers} = require("./schemas")
+//ToDo Import our authentication middleware
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: authMiddleware
+    //ToDo Add this in
+    //context: authMiddleware
 })
 
 //latest versions of apollo require await of server.start
