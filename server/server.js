@@ -3,6 +3,7 @@ const {ApolloServer} = require("apollo-server-express");
 const path = require("path");
 //Add in house dependencies here typedefs, db, authmiddleware
 
+const db = require("./config/connection")
 
 const PORT = process.env.PORT || 3001;
 const app = express();
