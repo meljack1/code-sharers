@@ -19,6 +19,14 @@ module.exports = {
       if (!token) {
         return req;
       }
+
+//add try+ catch function to add users data to request if the token has been verified 
+    try {
+        const { data } = jwt.verify(token, secret, { maxAge: expiration });
+        req.user = data;
+      } catch {
+        console.log('Invalid token');
+      }
   
     }
     
