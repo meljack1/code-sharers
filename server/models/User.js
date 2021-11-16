@@ -18,7 +18,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minLength: [6, "Password must have at least 6 characters"],
-  }
+  },
+  codeSnippets: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Snippet',
+  }],
 });
 
 // Pre-middleware to hash passwords before they are saved to the database.
