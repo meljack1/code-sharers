@@ -1,8 +1,42 @@
 const { AuthenticationError } = require("apollo-server-express");
-// ToDo import models here
+const { User } = require("../models");
+const { signToken } = require("../utils/auth");
 
-// ToDo Import utility functions here
+const resolvers = {
+    Query : {
+        me: async (parent, args, context) => {
+            if(context.user){
+                return User.findOne({_id: context.user._id}).populate("codeSnippets")
+            }
+            throw new AuthenticationError("You must be logged in to view this!");
+        }
+    },
+    Mutation: {
+        login: async (parent, {email, password}) => {
+            const user = await User.findOne({email});
 
-const resolvers = {}
+            if(!user){
+                throw new AuthenticationError("Username or password is incorrect.");
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if(!correctPw){
+                throw new AuthenticationError("Username or password is incorrect.");
+            }
+
+            const token = signToken(user);
+            return {token, user};
+        },
+        addUser: async(parent, {email, username, password}) => {
+            if(!email || !username || !password){
+                throw new AuthenticationError("Insufficient details provided to create a user!")
+            }
+            const newUser = await User.create({username, email, password});
+            const token = signToken(newUser);
+            return {token, user: newUser}
+        },
+    }
+};
 
 module.exports = resolvers;
