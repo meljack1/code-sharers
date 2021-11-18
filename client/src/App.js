@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 //necessary imports for graphql
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
@@ -27,9 +28,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <h1>Hello World!</h1>
-      </div>
+      <Router>
+        <div className="App">
+          <h1>Hello World!</h1>
+        </div>
+      </Router>
     </ApolloProvider>
     
   );
