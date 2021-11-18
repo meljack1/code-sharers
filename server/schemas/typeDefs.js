@@ -17,6 +17,13 @@ const typeDefs = gql`
         createdOn: String
         userId: User
     }
+    input SnippetInput{
+        name: String
+        description: String
+        language: String
+        code: String
+    }
+
     type Auth {
         token: ID
         user: User
@@ -27,6 +34,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!) : Auth
         addUser(username: String!, email: String!, password: String!) : Auth
+        saveSnippet(input: SnippetInput!) : User
     }
 `;
 
