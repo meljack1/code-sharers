@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Snippet } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -36,6 +36,21 @@ const resolvers = {
             const token = signToken(newUser);
             return {token, user: newUser}
         },
+        saveSnippet: async(parent, {input}, context) => {
+            if(context.user){
+                const userId = context.user._id
+                const updatedInput = {...input, userId}
+                const snippet = await Snippet.create({...updatedInput})
+
+                const updatedUser = await User.findOneAndUpdate(
+                    {_id: context.user._id},
+                    {$addToSet: {codeSnippets: snippet._id}},
+                    {new: true, runValidators: true}
+                ).populate("codeSnippets")
+                return updatedUser;
+            }
+            throw new AuthenticationError("You are not logged in!")
+        }
     }
 };
 
