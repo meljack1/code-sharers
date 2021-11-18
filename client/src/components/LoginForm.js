@@ -13,8 +13,12 @@ import Button from '@mui/material/Button';
 
 export default function LoginForm() {
   const [values, setValues] = React.useState({
+    loginUsername: '',
+    loginEmail: '',
     loginPassword: '',
     showLoginPassword: false,
+    signupUsername: '',
+    signupEmail: '',
     signupPassword: '',
     showSignupPassword: false,
   });
@@ -58,6 +62,7 @@ export default function LoginForm() {
                 required
                 id="login-username"
                 label="Username"
+                onChange={handleChange('loginUsername')}
                 />
             </div>
             <div>
@@ -65,6 +70,7 @@ export default function LoginForm() {
                 required
                 id="login-email"
                 label="Email"
+                onChange={handleChange('loginEmail')}
                 />
             </div>
             <div>
@@ -109,6 +115,7 @@ export default function LoginForm() {
                 required
                 id="signup-username"
                 label="Username"
+                onChange={handleChange('signupUsername')}
                 />
             </div>
             <div>
@@ -116,6 +123,7 @@ export default function LoginForm() {
                 required
                 id="signup-email"
                 label="Email"
+                onChange={handleChange('signupUsername')}
                 />
             </div>
             <div>
