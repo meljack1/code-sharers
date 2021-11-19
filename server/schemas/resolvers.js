@@ -11,7 +11,7 @@ const resolvers = {
             throw new AuthenticationError("You must be logged in to view this!");
         },
         snippets: async (parent, args, context) => {
-            return Snippet.find()
+            return Snippet.find().populate("userId")
         }
     },
     Mutation: {
