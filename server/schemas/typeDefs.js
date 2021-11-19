@@ -30,6 +30,7 @@ const typeDefs = gql`
     }
     type Query {
         me: User
+        snippets: [Snippet]
     }
     type Mutation {
         login(email: String!, password: String!) : Auth

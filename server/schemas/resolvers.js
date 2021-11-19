@@ -9,6 +9,9 @@ const resolvers = {
                 return User.findOne({_id: context.user._id}).populate("codeSnippets")
             }
             throw new AuthenticationError("You must be logged in to view this!");
+        },
+        snippets: async (parent, args, context) => {
+            return Snippet.find()
         }
     },
     Mutation: {
