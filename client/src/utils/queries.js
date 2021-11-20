@@ -31,3 +31,18 @@ export const SNIPPETS = gql`
             }
         }
     }`
+
+export const SNIPPET_BY_ID = gql`
+    query {
+        snippetById(_id: $_id) {
+        _id
+        name
+        description
+        language
+        code
+        createdOn
+        userId {
+            username
+            }
+        }
+    }`

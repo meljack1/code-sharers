@@ -12,7 +12,10 @@ const resolvers = {
         },
         snippets: async (parent, args, context) => {
             return Snippet.find().populate("userId")
-        }
+        },
+        snippetById: async (parent, args) => {
+            return Snippet.findById(args._id).populate("userId")
+        },
     },
     Mutation: {
         login: async (parent, {email, password}) => {
