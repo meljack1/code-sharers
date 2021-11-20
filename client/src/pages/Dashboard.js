@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 import { useMutation, useQuery} from "@apollo/client";
-import { Card, Typography, CardContent} from '@mui/material/Card'
+import { Card, Typography, CardContent} from '@mui/material'
 
 
-'@mui/material/Typography'
+import {GET_ME} from "../utils/queries"
 
-import {GET_ME} from "./utils/queries"
-
-import SnippetForm from "./SnippetForm"
+import SnippetForm from "../components/SnippetForm"
 
 
-import Auth from "./utils/auth";
-import { Typography } from "@mui/material";
+import Auth from "../utils/auth";
+
 
 const Dashboard = () => {
     //add in me query here
