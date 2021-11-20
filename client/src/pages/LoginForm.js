@@ -1,4 +1,7 @@
 import React from 'react';
+import { ADD_USER, LOGIN_USER } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
+import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -10,37 +13,100 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
+
+import Auth from '../utils/auth';
 
 export default function LoginForm() {
-  const [values, setValues] = React.useState({
-    loginUsername: '',
-    loginEmail: '',
-    loginPassword: '',
-    showLoginPassword: false,
-    signupUsername: '',
-    signupEmail: '',
-    signupPassword: '',
-    showSignupPassword: false,
+  const [loginInput, setLoginValues] = React.useState({
+    email: '',
+    password: '',
+    showPassword: false,
   });
-   
-  // Updates value of login or email password to what's typed
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+
+  const [signupInput, setSignupValues] = React.useState({
+    username: '',
+    email: '',
+    password: '',
+    showPassword: false,
+  })
+
+  const [loginErrorVisible, setLoginErrorVisible] = React.useState(false);
+  const [signupErrorVisible, setSignupErrorVisible] = React.useState(false);
+
+  const [login, {errorLoginUser, loginData}] = useMutation(LOGIN_USER);
+  const [createUser, {errorCreateUser, signupData}] = useMutation(ADD_USER);
+  
+  // Updates value of login form input fields as value is changed
+  const handleLoginChange = (prop) => (event) => {
+    setLoginValues({ ...loginInput, [prop]: event.target.value });
   };
+
+// Updates value of signup form input fields as value is changed
+  const handleSignupChange = (prop) => (event) => {
+    setSignupValues({ ...signupInput, [prop]: event.target.value });
+  };
+
+// Logic to login a user
+  const handleLoginUser = async (event) => {
+    event.preventDefault();
+    setLoginErrorVisible(false);
+    setSignupErrorVisible(false);
+
+    if (!loginInput.email || !loginInput.password) {
+        setLoginErrorVisible(true);
+    }
+
+    try {
+        const { data } = await login({
+          variables: { ...loginInput },
+        });
+  
+        Auth.login(data.login.token);
+    } catch (error) {
+        console.error(error);
+    }
+  
+    setLoginValues({
+        email: '',
+        password: '',
+    });
+  }
+
+  // Logic to create a user
+  const handleCreateUser = async (event) => {
+    event.preventDefault();
+    setLoginErrorVisible(false);
+    setSignupErrorVisible(false);
+
+    if (!signupInput.username || !signupInput.email || !signupInput.password) {
+        setSignupErrorVisible(true);
+    }
+    
+    try {
+        const { data } = await createUser({
+          variables: { ...signupInput },
+        });
+  
+        Auth.login(data.addUser.token);
+    } catch (error) {
+        console.error(error);
+    }
+  }
 
   // Switches between password dots and visible letters for login password
   const handleClickShowLoginPassword = () => {
-    setValues({
-        ...values,
-        showLoginPassword: !values.showLoginPassword,
+    setLoginValues({
+        ...loginInput,
+        showPassword: !loginInput.showPassword,
     });
   };
 
   // Switches between password dots and visible letters for signup password
   const handleClickShowSignupPassword = () => {
-    setValues({
-        ...values,
-        showSignupPassword: !values.showSignupPassword,
+    setSignupValues({
+        ...signupInput,
+        showPassword: !signupInput.showPassword,
     });
   };
     
@@ -60,17 +126,9 @@ export default function LoginForm() {
             <div>
                 <TextField
                 required
-                id="login-username"
-                label="Username"
-                onChange={handleChange('loginUsername')}
-                />
-            </div>
-            <div>
-                <TextField
-                required
                 id="login-email"
                 label="Email"
-                onChange={handleChange('loginEmail')}
+                onChange={handleLoginChange('email')}
                 />
             </div>
             <div>
@@ -78,9 +136,9 @@ export default function LoginForm() {
                 <InputLabel htmlFor="login-password">Password</InputLabel>
                 <OutlinedInput
                     id="login-password"
-                    type={values.showLoginPassword ? 'text' : 'password'}
-                    value={values.loginPassword}
-                    onChange={handleChange('loginPassword')}
+                    type={loginInput.showPassword ? 'text' : 'password'}
+                    value={loginInput.password}
+                    onChange={handleLoginChange('password')}
                     endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -88,7 +146,7 @@ export default function LoginForm() {
                         onClick={handleClickShowLoginPassword}
                         edge="end"
                         >
-                        {values.showLoginPassword ? <VisibilityOff /> : <Visibility />}
+                        {loginInput.showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </InputAdornment>
                     }
@@ -97,7 +155,17 @@ export default function LoginForm() {
                 </FormControl>
             </div>
             <div sx={{ }}>
-                <Button id="login-button" variant="contained">Login</Button>
+            <Button id="login-button" variant="contained" onClick={handleLoginUser}>
+                Login
+            </Button>
+            <Collapse in={loginErrorVisible}>
+                <Alert 
+                sx={{ m: 1 }} 
+                severity="error"
+                >
+                    Login details incorrect
+                </Alert>
+            </Collapse>
             </div>
         </Box>
 
@@ -115,7 +183,7 @@ export default function LoginForm() {
                 required
                 id="signup-username"
                 label="Username"
-                onChange={handleChange('signupUsername')}
+                onChange={handleSignupChange('username')}
                 />
             </div>
             <div>
@@ -123,7 +191,7 @@ export default function LoginForm() {
                 required
                 id="signup-email"
                 label="Email"
-                onChange={handleChange('signupEmail')}
+                onChange={handleSignupChange('email')}
                 />
             </div>
             <div>
@@ -131,9 +199,9 @@ export default function LoginForm() {
                 <InputLabel htmlFor="signup-password">Password</InputLabel>
                 <OutlinedInput
                     id="signup-password"
-                    type={values.showSignupPassword ? 'text' : 'password'}
-                    value={values.signupPassword}
-                    onChange={handleChange('signupPassword')}
+                    type={signupInput.showPassword ? 'text' : 'password'}
+                    value={signupInput.password}
+                    onChange={handleSignupChange('password')}
                     endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -141,7 +209,7 @@ export default function LoginForm() {
                         onClick={handleClickShowSignupPassword}
                         edge="end"
                         >
-                        {values.showSignupPassword ? <VisibilityOff /> : <Visibility />}
+                        {signupInput.showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </InputAdornment>
                     }
@@ -149,13 +217,21 @@ export default function LoginForm() {
                 />
                 </FormControl>
             </div>
-            <div sx={{ }}>
-                <Button id="signup-button" variant="contained">Sign up</Button>
+            <div>
+                <Button 
+                id="signup-button" 
+                variant="contained"
+                onClick={handleCreateUser}>Sign up</Button>
+                <Collapse in={signupErrorVisible}>
+                <Alert 
+                sx={{ m: 1 }} 
+                severity="error"
+                >
+                    Ensure all fields are full
+                </Alert>
+            </Collapse>
             </div>
         </Box>
-
-
-    
     </Container>
   );
 }
