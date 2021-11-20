@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -25,8 +26,12 @@ export default function ButtonAppBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               codeShare.
             </Typography>
-            <Button color="inherit">Main Page</Button>
-            <Button color="inherit">Login</Button>
+            <Link href="/">
+              <Button sx={{color: "white"}} color="inherit">Main Page</Button>
+            </Link>
+            <Link href="/login">
+              <Button sx={{color: "white"}} color="inherit">Login</Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>
