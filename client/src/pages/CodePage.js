@@ -1,33 +1,41 @@
 import React from 'react';
+import { useParams } from "react-router-dom"
 import { useQuery } from '@apollo/client';
+
 import { SNIPPET_BY_ID } from '../utils/queries';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 export default function CodePage() {
-    const { loading, data } = useQuery(SNIPPET_BY_ID, {
-        variables: {
-          _id: "6198c37c0fe2d22494e9dfb3"
-        },
-        fetchPolicy: "no-cache",
-    });
 
-    const snippet = data?.snippetById || {};
+  const { id } = useParams()
+
+  const { loading, data } = useQuery(SNIPPET_BY_ID, {
+    variables: {
+      _id: id
+    },
+    fetchPolicy: "no-cache",
+  });
+
 
   return (
-    <Box sx={{margin: 2}}>
+    loading ? (<p>Loading</p>) : <Box sx={{ margin: 2 }}>
       <Typography color="text.secondary" variant="h5" gutterBottom>
-        {snippet.name} - {snippet.language}
+        {data.snippetById.name} - {data.snippetById.language}
       </Typography>
       <Typography variant="body2" gutterBottom>
-        {snippet.description}
+        {data.snippetById.description}
       </Typography>
-      <Box sx={{ background: "lightGrey", font: "monospace", padding: 1, margin: 1}}>
-        {snippet.code}
+      <Box sx={{ background: "lightGrey", font: "monospace", padding: 1, margin: 1 }}>
+        {data.snippetById.code}
       </Box>
       <Typography sx={{ fontSize: 14 }} color="text.secondary">
-        Posted on {snippet.createdOn}
+        Posted on {data.snippetById.createdOn}
       </Typography>
-  </Box>
+      <Typography sx={{ fontSize: 14 }} color="text.secondary">
+        Created By: {data.snippetById.userId.username}
+      </Typography>
+    </Box>
+
   );
 }
