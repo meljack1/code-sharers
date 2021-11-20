@@ -17,7 +17,7 @@ export default function HomepageCard(props) {
           {props.description}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary">
-          Posted on {props.date}
+          Posted on {props.createdOn}
         </Typography>
       </CardContent>
       <CardActions sx={{background: "lightGrey"}}>
