@@ -123,7 +123,7 @@ export default function LoginForm() {
                 required
                 id="signup-email"
                 label="Email"
-                onChange={handleChange('signupUsername')}
+                onChange={handleChange('signupEmail')}
                 />
             </div>
             <div>
