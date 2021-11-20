@@ -6,6 +6,9 @@ import Box from '@mui/material/Box';
 
 export default function CodePage() {
     const { loading, data } = useQuery(SNIPPET_BY_ID, {
+        variables: {
+          _id: "6198c37c0fe2d22494e9dfb3"
+        },
         fetchPolicy: "no-cache",
     });
 

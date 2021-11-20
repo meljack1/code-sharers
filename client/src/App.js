@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
+import CodePage from "./components/CodePage"
 
 //necessary imports for graphql
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
@@ -30,9 +31,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="App">
-          <h1>Hello World!</h1>
-        </div>
+        <Navbar />
+        <CodePage />
       </Router>
     </ApolloProvider>
     

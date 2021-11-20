@@ -33,7 +33,7 @@ export const SNIPPETS = gql`
     }`
 
 export const SNIPPET_BY_ID = gql`
-    query {
+    query snippetById($_id: ID!){
         snippetById(_id: $_id) {
         _id
         name
