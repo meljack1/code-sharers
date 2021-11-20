@@ -1,12 +1,20 @@
 import React, {useState} from "react";
-import { Box, TextField} from "@mui/material"
+import { Box, TextField, Button} from "@mui/material"
+import { useMutation } from "@apollo/client"
+
+import { SAVE_SNIPPET } from "../utils/mutations"
 
 
-function Form(){
+
+function SnippetForm(){
+    //Set our state
     const [name, setName] =  useState("");
     const [description, setDescription] =  useState("");
     const [language, setLanguage] =  useState("");
     const [code, setCode] = useState("");
+
+    //Use mutation
+    const [saveSnippet, {error, data}] = useMutation(SAVE_SNIPPET);
 
     const handleInputChange = (event) => {
         const {target} = event;
@@ -14,25 +22,46 @@ function Form(){
         const inputValue = target.value;
 
         switch(inputType){
-            case name:
+            case "name":
                 setName(inputValue);
                 break;
-            case description:
+            case "description":
                 setDescription(inputValue);
                 break;
-            case language:
+            case "language":
                 setLanguage(inputValue);
                 break;
-            case code:
+            case "code":
                 setCode(inputValue);
                 break;
             default:
+                console.log("Invalid Target")
                 return;
         }
     }
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        //handle invalid submission
+        if(!name || !description || !language || !code){
+
+        }
+
+        const submission = {
+            name,
+            description,
+            language,
+            code
+        }
+
+        try {
+            const {data} = await saveSnippet({
+                variables: {input: submission}
+            })
+        } catch (err){
+            console.log(err)
+        }
     }
 
     return (
@@ -43,6 +72,7 @@ function Form(){
             }}
             noValidate
             autoComplete="off"
+            onSubmit={handleFormSubmit}
         >
             <div>
                 <TextField
@@ -68,9 +98,9 @@ function Form(){
             <div>
                 <TextField
                 required
-                id="langauge"
+                id="language"
                 label="Language"
-                placeholder="Language"
+                placeholder="Enter the coding language"
                 value={language}
                 onChange={handleInputChange}/>
             </div>
@@ -85,8 +115,12 @@ function Form(){
                 value={code}
                 onChange={handleInputChange}/>
             </div>
+            <Button 
+                type="submit">
+                Save Snippet
+            </Button>
         </Box>
     )
 }
 
-export default Form
+export default SnippetForm
