@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
-import CodePage from "./components/CodePage"
+import Homepage from "./pages/Homepage"
+import Dashboard from "./pages/Dashboard"
 
 //necessary imports for graphql
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
@@ -31,9 +32,21 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <>
         <Navbar />
-        <CodePage />
+
+          {/*switch with routing / = homepage /me = dashboard /singlepost = individual snippet /usersinglepost = user indivudal snippet*/}
+        <Routes>
+          
+          <Route exact path='/' element={<Homepage/>} />
+
+          <Route exact path="/me" element={<Dashboard/>} /> 
+          
+        </Routes>
+
+      </>
       </Router>
+      
     </ApolloProvider>
     
   );
