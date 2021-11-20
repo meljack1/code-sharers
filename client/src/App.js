@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Homepage from "./pages/Homepage"
 import Dashboard from "./pages/Dashboard"
+import Login from "./pages/LoginForm"
 
 //necessary imports for graphql
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
@@ -41,6 +42,8 @@ function App() {
           <Route exact path='/' element={<Homepage/>} />
 
           <Route exact path="/me" element={<Dashboard/>} /> 
+
+          <Route exact path="/login" element={<Login/>} /> 
           
         </Routes>
 
