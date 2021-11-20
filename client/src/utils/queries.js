@@ -17,3 +17,17 @@ export const GET_ME = gql`
             }
         }
     }`
+
+export const SNIPPETS = gql`
+    query{
+        snippets{
+        name
+        description
+        language
+        code
+        createdOn
+        userId {
+            username
+            }
+        }
+    }`
