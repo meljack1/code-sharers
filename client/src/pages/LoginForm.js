@@ -50,6 +50,7 @@ export default function LoginForm() {
 // Logic to login a user
   const handleLoginUser = async (event) => {
     event.preventDefault();
+    console.log(loginInput);
     setLoginErrorVisible(false);
     setSignupErrorVisible(false);
 
@@ -59,7 +60,7 @@ export default function LoginForm() {
 
     try {
         const { data } = await login({
-          variables: { ...loginInput },
+          variables: { email: loginInput.email, password: loginInput.password },
         });
   
         Auth.login(data.login.token);
@@ -85,7 +86,7 @@ export default function LoginForm() {
     
     try {
         const { data } = await createUser({
-          variables: { ...signupInput },
+          variables: { username: signupInput.username, email: signupInput.email, password: signupInput.password },
         });
   
         Auth.login(data.addUser.token);
