@@ -21,6 +21,7 @@ export const GET_ME = gql`
 export const SNIPPETS = gql`
     query{
         snippets{
+        _id
         name
         description
         language
