@@ -1,13 +1,15 @@
+//Ract Imports
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+//Apollo Imports
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
+import { setContext } from "@apollo/client/link/context"
+//Component Imports
 import Navbar from "./components/Navbar"
 import Homepage from "./pages/Homepage"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/LoginForm"
-
-//necessary imports for graphql
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
-import { setContext } from "@apollo/client/link/context"
+import CodePage from "./pages/CodePage";
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -44,6 +46,8 @@ function App() {
           <Route exact path="/me" element={<Dashboard/>} /> 
 
           <Route exact path="/login" element={<Login/>} /> 
+
+          <Route exact path="/:id" element={<CodePage/>} />
           
         </Routes>
 
