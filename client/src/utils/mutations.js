@@ -38,3 +38,18 @@ export const SAVE_SNIPPET = gql`
         }
     }`
 
+export const REMOVE_SNIPPET = gql`
+    mutation removeSnippet($_id: ID){
+        removeSnippet(_id: $_id){
+            _id
+            username
+            email
+            codeSnippets{
+                name
+                description
+                language
+                code
+                createdOn
+            }
+        }
+    }`
