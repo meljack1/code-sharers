@@ -10,6 +10,7 @@ import Homepage from "./pages/Homepage"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/LoginForm"
 import CodePage from "./pages/CodePage";
+import UserCodePage from "./pages/UserCodePage"
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -49,7 +50,7 @@ function App() {
 
           <Route exact path="/:id" element={<CodePage/>} />
 
-          <Route exact path="/me/:id" element={<CodePage/>} />
+          <Route exact path="/me/:id" element={<UserCodePage/>} />
 
         </Routes>
 
