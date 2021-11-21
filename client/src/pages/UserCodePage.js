@@ -8,9 +8,10 @@ import { REMOVE_SNIPPET } from "../utils/mutations"
 import {Typography, Button, Box} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import UpdateSnippetForm from "../components/UpdateSnippetForm"
+
 
 export default function CodePage() {
-
   //Query for data
   const { id } = useParams()
   const { loading, data } = useQuery(SNIPPET_BY_ID, {
@@ -37,7 +38,6 @@ export default function CodePage() {
     }catch(err) {
       console.error(err)
     }
-
   }
 
   return (
@@ -61,8 +61,13 @@ export default function CodePage() {
       <Button variant="outlined" startIcon={<DeleteIcon />} onClick={handleDelete}>
         Delete
       </Button>
+
+      <Typography color="text.secondary" variant="h5" gutterBottom>
+        Update Snippet Form
+      </Typography>
+
+      <UpdateSnippetForm props={data}/>
+
     </Box>
-
-
   );
 }
