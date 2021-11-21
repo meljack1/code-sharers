@@ -56,6 +56,37 @@ const resolvers = {
                 return updatedUser;
             }
             throw new AuthenticationError("You are not logged in!")
+        },
+        removeSnippet: async(parent, {_id} , context) => {
+            if(context.user) {
+                await Snippet.findByIdAndDelete(
+                    {_id}
+                )
+                
+                const user = User.findOneAndUpdate(
+                    {_id: context.user._id},
+                    {$pull: {codeSnippets: {_id}}},
+                    {new: true}
+                ).populate("codeSnippets")
+
+                return user 
+            }
+
+            throw new AuthenticationError("You are not logged in.")
+
+        },
+        updateSnippet: async(parent, {input}, context) => {
+            if(context.user){
+                const snippet = await Snippet.findByIdAndUpdate(
+                    {_id: input._id},
+                    {...input},
+                    {new: true}
+                )
+
+                return snippet
+            }
+
+            throw new AuthenticationError("You are not logged in!")
         }
     }
 };

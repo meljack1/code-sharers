@@ -29,6 +29,9 @@ export default function ButtonAppBar() {
             <Link href="/">
               <Button sx={{color: "white"}} color="inherit">Main Page</Button>
             </Link>
+            <Link href="/me">
+              <Button sx={{color: "white"}} color="inherit">My Page</Button>
+            </Link>
             <Link href="/login">
               <Button sx={{color: "white"}} color="inherit">Login</Button>
             </Link>

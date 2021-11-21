@@ -2,19 +2,19 @@ import React, {useState} from "react";
 import { Box, TextField, Button} from "@mui/material"
 import { useMutation } from "@apollo/client"
 
-import { SAVE_SNIPPET } from "../utils/mutations"
+import { UPDATE_SNIPPET } from "../utils/mutations"
 
+function UpdateSnippetForm({props}){
+    
+    //set our state
+    const [_id, set_id] = useState(props.snippetById._id);
+    const [name, setName] = useState(props.snippetById.name);
+    const [description, setDescription] = useState(props.snippetById.description);
+    const [language, setLanguage] = useState(props.snippetById.language);
+    const [code, setCode] = useState(props.snippetById.code);
 
-
-function SnippetForm(){
-    //Set our state
-    const [name, setName] =  useState("");
-    const [description, setDescription] =  useState("");
-    const [language, setLanguage] =  useState("");
-    const [code, setCode] = useState("");
-
-    //Use mutation
-    const [saveSnippet, {error, data}] = useMutation(SAVE_SNIPPET);
+    //use mutation
+    const [updateSnippet, {error, data}] = useMutation(UPDATE_SNIPPET);
 
     const handleInputChange = (event) => {
         const {target} = event;
@@ -49,6 +49,7 @@ function SnippetForm(){
         }
 
         const submission = {
+            _id,
             name,
             description,
             language,
@@ -56,9 +57,11 @@ function SnippetForm(){
         }
 
         try {
-            const {data} = await saveSnippet({
+            const {data} = await updateSnippet({
                 variables: {input: submission}
             })
+
+            window.location.reload()
         } catch (err){
             console.log(err)
         }
@@ -117,10 +120,11 @@ function SnippetForm(){
             </div>
             <Button 
                 type="submit">
-                Save Snippet
+                Update This Snippet
             </Button>
         </Box>
     )
 }
 
-export default SnippetForm
+
+export default UpdateSnippetForm
