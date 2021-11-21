@@ -1,15 +1,18 @@
 import React from 'react';
 import { useParams } from "react-router-dom"
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { REMOVE_SNIPPET } from "../utils/mutations"
+
+import {Typography, Button, Box} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 export default function CodePage() {
 
+  //Query for data
   const { id } = useParams()
-
   const { loading, data } = useQuery(SNIPPET_BY_ID, {
     variables: {
       _id: id
@@ -17,6 +20,25 @@ export default function CodePage() {
     fetchPolicy: "no-cache",
   });
 
+  //Add delete mutation
+  const [removeSnippet, { error }] = useMutation(REMOVE_SNIPPET)
+  const handleDelete = async () => {
+    const _id = id
+    console.log(_id)
+    try {
+      const {data} = await removeSnippet({
+        variables: {_id} 
+      })
+
+      if(!data) {
+        throw new Error ("something went wrong")
+      }
+      window.location.pathname ="/me"
+    }catch(err) {
+      console.error(err)
+    }
+
+  }
 
   return (
     loading ? (<p>Loading</p>) : <Box sx={{ margin: 2 }}>
@@ -35,6 +57,12 @@ export default function CodePage() {
       <Typography sx={{ fontSize: 14 }} color="text.secondary">
         Created By: {data.snippetById.userId.username}
       </Typography>
+
+      <Button variant="outlined" startIcon={<DeleteIcon />} onClick={handleDelete}>
+        Delete
+      </Button>
     </Box>
+
+
   );
 }
