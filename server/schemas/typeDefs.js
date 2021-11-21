@@ -23,7 +23,13 @@ const typeDefs = gql`
         language: String
         code: String
     }
-
+    input updatedSnippetInput{
+        _id: ID
+        name: String
+        description: String
+        language: String
+        code: String
+    }
     type Auth {
         token: ID
         user: User
@@ -37,6 +43,7 @@ const typeDefs = gql`
         login(email: String!, password: String!) : Auth
         addUser(username: String!, email: String!, password: String!) : Auth
         saveSnippet(input: SnippetInput!) : User
+        updateSnippet(input: updatedSnippetInput!) : Snippet
         removeSnippet(_id: ID!): User
     }
 `;
