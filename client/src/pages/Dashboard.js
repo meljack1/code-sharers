@@ -14,18 +14,12 @@ import Auth from "../utils/auth";
 const Dashboard = () => {
     //add in me query here
     const {loading, data} = useQuery(GET_ME)
-    const userData = data?.me || {}
-    const {snippets} = userData
 
-    if (loading){
-        return <h1>Please wait while the page loads.</h1>
-    }
-
-    return (
+    return (loading) ? <h1>Loading</h1> : (
         <>
             <SnippetForm/>
             <div>
-                {snippets.map(snippet => {
+                {data.me.codeSnippets.map(snippet => {
                     return (
                         <Card sx={{margin: 2}}>
                         <CardContent>
@@ -40,9 +34,6 @@ const Dashboard = () => {
                           </Typography>
                           <Typography sx={{ fontSize: 14 }} color="text.secondary">
                             Posted on {snippet.date}
-                          </Typography>
-                          <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                            Created By {snippet.userId.username}
                           </Typography>
                           <Link href={`/me/${snippet._id}`}>
                             <Button size="small" sx={{margin: "auto"}}>Edit</Button>
