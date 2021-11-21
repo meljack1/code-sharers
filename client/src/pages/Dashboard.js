@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useQuery } from "@apollo/client";
-import { Card, Typography, CardContent} from '@mui/material'
+import { Card, Typography, CardContent, Link, Button} from '@mui/material'
 
 
 import {GET_ME} from "../utils/queries"
