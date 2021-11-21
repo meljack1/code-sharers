@@ -53,3 +53,14 @@ export const REMOVE_SNIPPET = gql`
             }
         }
     }`
+
+export const UPDATE_SNIPPET = gql`
+    mutation updateSnippet($input: updatedSnippetInput!){
+        updateSnippet(input: $input){
+            _id: ID
+            name: String
+            description: String
+            language: String
+            code: String
+        }
+    }`

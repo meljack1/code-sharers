@@ -45,7 +45,7 @@ function SnippetForm(){
 
         //handle invalid submission
         if(!name || !description || !language || !code){
-
+            return false
         }
 
         const submission = {
