@@ -48,7 +48,9 @@ function App() {
           <Route exact path="/login" element={<Login/>} /> 
 
           <Route exact path="/:id" element={<CodePage/>} />
-          
+
+          <Route exact path="/me/:id" element={<CodePage/>} />
+
         </Routes>
 
       </>
