@@ -14,33 +14,44 @@ const Dashboard = () => {
 
   return (loading) ? <h1>Loading</h1> : (
     <Container>
-      <Typography variant="h2" sx={{ textAlign: "center" }}> Welcome, {data.me.username}!</Typography>
-      <Box>
+      <Typography variant="h2" sx={{ textAlign: "center", fontSize: "6ch", m: 1, mb: 4 }}> Welcome, {data.me.username}!</Typography>
+      <Box 
+        sx={{ 
+          display: "flex", 
+          flexDirection: 'row', 
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          margin: 1, 
+        }}
+      >
         <SnippetForm />
-        <Box>
-          {data.me.codeSnippets.map(snippet => {
-            return (
-              <Card sx={{ margin: 2 }}>
-                <CardContent>
-                  <Typography color="text.secondary" variant="h5" gutterBottom>
-                    {snippet.name} - {snippet.language}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {snippet.description}
-                  </Typography>
-                  <Typography>
-                    {snippet.code}
-                  </Typography>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                    Posted on {snippet.date}
-                  </Typography>
-                  <Link href={`/me/${snippet._id}`}>
-                    <Button size="small" sx={{ margin: "auto" }}>Edit</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            )
-          })}
+        <Box sx={{flexGrow: 2}}>
+        <Typography variant="h3" sx={{fontSize: "4ch"}}> Your snippets: </Typography>
+          <Box sx={{overflow: "auto"}}>
+            {data.me.codeSnippets.map(snippet => {
+              return (
+                <Card sx={{ margin: 2 }}>
+                  <CardContent>
+                    <Typography color="text.secondary" variant="h5" gutterBottom>
+                      {snippet.name} - {snippet.language}
+                    </Typography>
+                    <Typography variant="body2" gutterBottom>
+                      {snippet.description}
+                    </Typography>
+                    <Typography>
+                      {snippet.code}
+                    </Typography>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                      Posted on {snippet.date}
+                    </Typography>
+                    <Link href={`/me/${snippet._id}`}>
+                      <Button size="small" sx={{ margin: "auto" }}>Edit</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </Box>
         </Box>
       </Box>
     </Container>

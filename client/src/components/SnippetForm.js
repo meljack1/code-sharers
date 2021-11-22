@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, TextField, Button} from "@mui/material"
+import { Box, TextField, Button, Typography} from "@mui/material"
 import { useMutation } from "@apollo/client"
 
 import { SAVE_SNIPPET } from "../utils/mutations"
@@ -68,17 +68,20 @@ function SnippetForm(){
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': { m: 1, width: '75%' },
+                flexGrow: 1,
+                textAlign: 'center',
             }}
             noValidate
             autoComplete="off"
             onSubmit={handleFormSubmit}
         >
+            <Typography variant="h3" sx={{fontSize: "4ch"}}> Create a new snippet: </Typography>
             <div>
                 <TextField
                 required
                 id="name"
-                label="Name"
+                label="Snippet Name"
                 placeholder="Name"
                 value={name}
                 onChange={handleInputChange}
