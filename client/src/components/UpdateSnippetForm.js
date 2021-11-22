@@ -1,8 +1,12 @@
 import React, {useState} from "react";
+import { useParams } from "react-router-dom"
 import { Box, TextField, Button} from "@mui/material"
-import { useMutation } from "@apollo/client"
+import { useQuery, useMutation } from '@apollo/client';
 
-import { UPDATE_SNIPPET } from "../utils/mutations"
+import { UPDATE_SNIPPET, REMOVE_SNIPPET } from "../utils/mutations"
+import { SNIPPET_BY_ID } from '../utils/queries';
+
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function UpdateSnippetForm({props}){
     
@@ -67,11 +71,40 @@ function UpdateSnippetForm({props}){
         }
     }
 
+    const { id } = useParams()
+    const { loading, snippetData } = useQuery(SNIPPET_BY_ID, {
+        variables: {
+        _id: id
+        },
+        fetchPolicy: "no-cache",
+    });
+
+  //Add delete mutation
+  const [removeSnippet, { removeError }] = useMutation(REMOVE_SNIPPET)
+  const handleDelete = async () => {
+    const _id = id
+    console.log(_id)
+    try {
+      const {data} = await removeSnippet({
+        variables: {_id} 
+      })
+
+      if(!data) {
+        throw new Error ("something went wrong")
+      }
+      window.location.pathname ="/me"
+    }catch(err) {
+      console.error(err)
+    }
+  }
+
     return (
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': { m: 1, width: '75%' },
+                flexGrow: 1,
+                textAlign: 'center',
             }}
             noValidate
             autoComplete="off"
@@ -119,8 +152,20 @@ function UpdateSnippetForm({props}){
                 onChange={handleInputChange}/>
             </div>
             <Button 
-                type="submit">
+                type="submit"
+                variant="contained"
+                color="secondary"
+                sx={{width: "75%", m:0.5}}>
                 Update This Snippet
+            </Button>
+            <Button 
+                variant="contained" 
+                color="primary" 
+                startIcon={<DeleteIcon />} 
+                sx={{width: "75%", m:0.5}}
+                onClick={handleDelete}
+            >
+                Delete this snippet
             </Button>
         </Box>
     )
