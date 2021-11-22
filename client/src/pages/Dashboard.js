@@ -39,7 +39,7 @@ const Dashboard = () => {
         <SnippetForm />
         <Divider orientation="vertical" flexItem />
         <Box sx={{flexGrow: 2, mx: 3}}>
-          <Typography variant="h3" sx={{fontSize: "4ch", textAlign: "center"}}> Your snippets: </Typography>
+          <Typography variant="h3" sx={{ textAlign: "center"}}> Your snippets: </Typography>
             <Box sx={{overflow: "auto"}}>
               {data.me.codeSnippets.map(snippet => {
                 return (

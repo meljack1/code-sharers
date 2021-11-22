@@ -76,7 +76,7 @@ function SnippetForm(){
             autoComplete="off"
             onSubmit={handleFormSubmit}
         >
-            <Typography variant="h3" sx={{fontSize: "4ch", mb: 4}}> Create a new snippet: </Typography>
+            <Typography variant="h3" sx={{ mb: 4}}> Create a new snippet: </Typography>
             <div>
                 <TextField
                 required

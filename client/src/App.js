@@ -72,7 +72,8 @@ function App() {
       "fontFamily": "DM Sans",
       h1: {
         fontFamily: `'Major Mono Display', monospace`,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: "3ch",
       },
       h2: {
         fontSize: "4ch",

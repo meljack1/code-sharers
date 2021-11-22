@@ -35,7 +35,7 @@ export default function ButtonAppBar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h1" component="div" sx={{ fontSize: "3ch", flexGrow: 1 }}>
+            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
               codeShare.
             </Typography>
             {largeScreen ? (

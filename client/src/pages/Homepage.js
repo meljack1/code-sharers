@@ -13,7 +13,7 @@ export default function Homepage() {
     console.log(snippetList)
   return (
     <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
-        <Typography variant="h2" sx={{ pb: 3, fontSize: "3ch", color: "black" }}>
+        <Typography variant="h2" sx={{ pb: 3 }}>
             Most recent posts:
         </Typography>
         <Divider />
