@@ -10,7 +10,8 @@ import Homepage from "./pages/Homepage"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/LoginForm"
 import CodePage from "./pages/CodePage";
-import UserCodePage from "./pages/UserCodePage"
+import UserCodePage from "./pages/UserCodePage";
+import "./css/borderBox.css";
 
 const httpLink = createHttpLink({
   uri: "/graphql"
