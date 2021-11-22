@@ -48,7 +48,8 @@ function App() {
         contrastText: '#10BF1A',
       },
       secondary: {
-        main: '#f50057',
+        main: '#10BF1A',
+        contrastText: 'white',
       },
       background: {
         default: "black",
@@ -83,6 +84,7 @@ function App() {
           <Box sx={{
             backgroundImage: `url(${BackgroundImage})`,
             backgroundColor: "rgba(77, 77, 77, 0.4)",
+            minHeight: "100vh",
           }}>
           <Navbar />
 
