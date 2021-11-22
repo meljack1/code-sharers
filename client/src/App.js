@@ -73,6 +73,12 @@ function App() {
       h1: {
         fontFamily: `'Major Mono Display', monospace`,
         fontWeight: "bold"
+      },
+      h2: {
+        fontSize: "4ch",
+      },
+      h3: {
+        fontSize: "4ch",
       }
     }
   })
