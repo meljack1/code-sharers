@@ -2,6 +2,7 @@ const express = require("express");
 const {ApolloServer} = require("apollo-server-express");
 const path = require("path");
 
+//added a comment here
 //Add in house dependencies here typedefs, db, authmiddleware
 const db = require("./config/connection")
 const {typeDefs, resolvers} = require("./schemas")
