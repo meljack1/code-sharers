@@ -1,19 +1,25 @@
 import React from 'react';
 import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
-import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Button from '@mui/material/Button';
-import Collapse from '@mui/material/Collapse';
+import {
+    Alert, 
+    Container, 
+    Box, 
+    TextField, 
+    FormControl, 
+    IconButton, 
+    InputLabel, 
+    InputAdornment, 
+    OutlinedInput, 
+    Button, 
+    Collapse,
+    Divider,
+    Typography
+} from '@mui/material';
+import {
+    Visibility, 
+    VisibilityOff, 
+} from '@mui/icons-material';
 
 import Auth from '../utils/auth';
 
@@ -113,125 +119,154 @@ export default function LoginForm() {
     
   return (
     <Container 
-        sx={{display: "flex"}}
+        sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}
     >
+        <Typography variant="h2" sx={{ textAlign: "center", fontSize: "6ch", p: 1, pb: 4 }}> 
+            Join the codeShare community
+        </Typography>
         <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': { m: 1, width: '30ch' },
-                '& .MuiFormControl-root': { m: 1, width: '30ch' },
-                '& .MuiButton-root': { m: 1, width: '30ch' }
-            }}
+        sx={{
+            display: "flex", 
+            flexDirection: 'row', 
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            margin: 1, 
+        }}
         >
-            <h1>Login:</h1>
-            <div>
-                <TextField
-                required
-                id="login-email"
-                label="Email"
-                onChange={handleLoginChange('email')}
-                />
-            </div>
-            <div>
-                <FormControl variant="outlined">
-                <InputLabel htmlFor="login-password">Password</InputLabel>
-                <OutlinedInput
-                    id="login-password"
-                    type={loginInput.showPassword ? 'text' : 'password'}
-                    value={loginInput.password}
-                    onChange={handleLoginChange('password')}
-                    endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowLoginPassword}
-                        edge="end"
-                        >
-                        {loginInput.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                    }
-                    label="Password"
-                />
-                </FormControl>
-            </div>
-            <div sx={{ }}>
-            <Button id="login-button" variant="contained" onClick={handleLoginUser}>
-                Login
-            </Button>
-            <Collapse in={loginErrorVisible}>
-                <Alert 
-                sx={{ m: 1 }} 
-                severity="error"
-                >
-                    Login details incorrect
-                </Alert>
-            </Collapse>
-            </div>
-        </Box>
-
-        <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': { m: 1, width: '30ch' },
-                '& .MuiFormControl-root': { m: 1, width: '30ch' },
-                '& .MuiButton-root': { m: 1, width: '30ch' }
-            }}
-        >
-            <h1>Sign Up:</h1>
-            <div>
-                <TextField
-                required
-                id="signup-username"
-                label="Username"
-                onChange={handleSignupChange('username')}
-                />
-            </div>
-            <div>
-                <TextField
-                required
-                id="signup-email"
-                label="Email"
-                onChange={handleSignupChange('email')}
-                />
-            </div>
-            <div>
-                <FormControl variant="outlined">
-                <InputLabel htmlFor="signup-password">Password</InputLabel>
-                <OutlinedInput
-                    id="signup-password"
-                    type={signupInput.showPassword ? 'text' : 'password'}
-                    value={signupInput.password}
-                    onChange={handleSignupChange('password')}
-                    endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowSignupPassword}
-                        edge="end"
-                        >
-                        {signupInput.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                    }
-                    label="Password"
-                />
-                </FormControl>
-            </div>
-            <div>
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '50%' },
+                    '& .MuiFormControl-root': { m: 1, width: '75%' },
+                    '& .MuiButton-root': { m: 1, width: '75%' },
+                    flexGrow: 1,
+                    textAlign: 'center',
+                }}
+            >
+                <Typography variant="h3">Login:</Typography>
+                <Box>
+                    <TextField
+                    required
+                    id="login-email"
+                    label="Email"
+                    onChange={handleLoginChange('email')}
+                    />
+                </Box>
+                <Box>
+                    <FormControl variant="outlined">
+                    <InputLabel htmlFor="login-password">Password</InputLabel>
+                    <OutlinedInput
+                        id="login-password"
+                        type={loginInput.showPassword ? 'text' : 'password'}
+                        value={loginInput.password}
+                        onChange={handleLoginChange('password')}
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowLoginPassword}
+                            edge="end"
+                            >
+                            {loginInput.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="Password"
+                    />
+                    </FormControl>
+                </Box>
+                <Box>
                 <Button 
-                id="signup-button" 
-                variant="contained"
-                onClick={handleCreateUser}>Sign up</Button>
-                <Collapse in={signupErrorVisible}>
-                <Alert 
-                sx={{ m: 1 }} 
-                severity="error"
+                    id="login-button" 
+                    variant="contained" 
+                    onClick={handleLoginUser}
+                    color="secondary"
+                    type="submit"
+                    sx={{width: '75%', m: 1}}
                 >
-                    Ensure all fields are full
-                </Alert>
-            </Collapse>
-            </div>
+                    Login
+                </Button>
+                <Collapse in={loginErrorVisible}>
+                    <Alert 
+                    sx={{ m: 1 }} 
+                    severity="error"
+                    >
+                        Login details incorrect
+                    </Alert>
+                </Collapse>
+                </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '50%' },
+                    '& .MuiFormControl-root': { m: 1, width: '75%' },
+                    '& .MuiButton-root': { m: 1, width: '75%' },
+                    flexGrow: 1,
+                    textAlign: 'center',
+                }}
+            >
+                <Typography variant="h3">Sign up:</Typography>
+                <Box>
+                    <TextField
+                    required
+                    id="signup-username"
+                    label="Username"
+                    onChange={handleSignupChange('username')}
+                    />
+                </Box>
+                <Box>
+                    <TextField
+                    required
+                    id="signup-email"
+                    label="Email"
+                    onChange={handleSignupChange('email')}
+                    />
+                </Box>
+                <Box>
+                    <FormControl variant="outlined">
+                    <InputLabel htmlFor="signup-password">Password</InputLabel>
+                    <OutlinedInput
+                        id="signup-password"
+                        type={signupInput.showPassword ? 'text' : 'password'}
+                        value={signupInput.password}
+                        onChange={handleSignupChange('password')}
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowSignupPassword}
+                            edge="end"
+                            >
+                            {signupInput.showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="Password"
+                    />
+                    </FormControl>
+                </Box>
+                <Box>
+                    <Button 
+                    id="signup-button" 
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleCreateUser}
+                    type="submit"
+                    sx={{width: '75%', m: 1}}>
+                        Sign up
+                    </Button>
+                    <Collapse in={signupErrorVisible}>
+                    <Alert 
+                    sx={{ m: 1 }} 
+                    severity="error"
+                    >
+                        Ensure all fields are full
+                    </Alert>
+                </Collapse>
+                </Box>
+            </Box>
         </Box>
     </Container>
   );

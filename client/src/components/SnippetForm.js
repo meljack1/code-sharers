@@ -76,7 +76,7 @@ function SnippetForm(){
             autoComplete="off"
             onSubmit={handleFormSubmit}
         >
-            <Typography variant="h3" sx={{fontSize: "4ch"}}> Create a new snippet: </Typography>
+            <Typography variant="h3" sx={{ mb: 4}}> Create a new snippet: </Typography>
             <div>
                 <TextField
                 required
@@ -119,7 +119,10 @@ function SnippetForm(){
                 onChange={handleInputChange}/>
             </div>
             <Button 
-                type="submit">
+                type="submit"
+                variant="contained"
+                color="secondary"
+                sx={{width: '75%', m: 1}}>
                 Save Snippet
             </Button>
         </Box>

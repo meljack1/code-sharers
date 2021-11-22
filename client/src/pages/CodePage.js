@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import {Typography, Box, Container} from '@mui/material/';
 
 export default function CodePage() {
 
@@ -17,25 +16,38 @@ export default function CodePage() {
     fetchPolicy: "no-cache",
   });
 
-
   return (
-    loading ? (<p>Loading</p>) : <Box sx={{ margin: 2 }}>
-      <Typography color="text.secondary" variant="h5" gutterBottom>
-        {data.snippetById.name} - {data.snippetById.language}
-      </Typography>
-      <Typography variant="body2" gutterBottom>
-        {data.snippetById.description}
-      </Typography>
-      <Box sx={{ background: "lightGrey", font: "monospace", padding: 1, margin: 1 }}>
-        {data.snippetById.code}
+    loading ? (<p>Loading</p>) : 
+    <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+      <Box sx={{ margin: 2 }}>
+        <Typography color="text.secondary" variant="h2" sx={{textAlign: "center"}} gutterBottom>
+          {data.snippetById.name} 
+        </Typography>
+        <Typography sx={{ fontSize: "3ch" }} gutterBottom>
+          {data.snippetById.description}
+        </Typography>
+        <Box sx={{ background: "lightGrey", fontSize: "2.5ch", fontFamily: "Courier", fontWeight: "bold", padding: 3, margin: 2 }}>
+          {data.snippetById.code}
+        </Box>
+        <Box 
+          sx={{ 
+            display: "flex", 
+            flexDirection: 'row', 
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+          }}
+        >
+          <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+            Posted on {data.snippetById.createdOn}
+          </Typography>
+          <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+            Language: {data.snippetById.language}
+          </Typography>
+          <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+            Created By: {data.snippetById.userId.username}
+          </Typography>
+        </Box>
       </Box>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary">
-        Posted on {data.snippetById.createdOn}
-      </Typography>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary">
-        Created By: {data.snippetById.userId.username}
-      </Typography>
-    </Box>
-
+    </Container>
   );
 }
