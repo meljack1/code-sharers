@@ -41,13 +41,13 @@ export default function ButtonAppBar() {
             {largeScreen ? (
               <Box>
                 <Link href="/">
-                  <Button variant="h3" sx={{color: "white"}} color="inherit">Home</Button>
+                  <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Home</Button>
                 </Link>
                 <Link href="/me">
-                  <Button sx={{color: "white"}} color="inherit">My Page</Button>
+                  <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">My Page</Button>
                 </Link>
                 <Link href="/login">
-                  <Button sx={{color: "white"}} color="inherit">Login</Button>
+                  <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Login</Button>
                 </Link>
               </Box>
             ) : ( 

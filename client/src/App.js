@@ -72,7 +72,7 @@ function App() {
       h1: {
         fontFamily: `'Major Mono Display', monospace`,
         fontWeight: "bold"
-      },
+      }
     }
   })
 
