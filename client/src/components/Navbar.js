@@ -35,13 +35,13 @@ export default function ButtonAppBar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ fontSize: "3ch", flexGrow: 1 }}>
+            <Typography variant="h1" component="div" sx={{ fontSize: "3ch", flexGrow: 1 }}>
               codeShare.
             </Typography>
             {largeScreen ? (
               <Box>
                 <Link href="/">
-                  <Button sx={{color: "white"}} color="inherit">Home</Button>
+                  <Button variant="h3" sx={{color: "white"}} color="inherit">Home</Button>
                 </Link>
                 <Link href="/me">
                   <Button sx={{color: "white"}} color="inherit">My Page</Button>

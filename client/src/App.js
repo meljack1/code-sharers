@@ -11,7 +11,11 @@ import Dashboard from "./pages/Dashboard"
 import Login from "./pages/LoginForm"
 import CodePage from "./pages/CodePage";
 import UserCodePage from "./pages/UserCodePage";
-import "./css/borderBox.css";
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import "./assets/css/borderBox.css";
+import './assets/css/fonts.css';
+
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -34,7 +38,27 @@ const client = new ApolloClient({
 })
 
 function App() {
+  const THEME = createTheme({
+    palette: {
+      primary: {
+        main: '#000000',
+        contrastText: '#10BF1A',
+      },
+      secondary: {
+        main: '#f50057',
+      },
+    },
+    typography: {
+      "fontFamily": "DM Sans",
+      h1: {
+        fontFamily: `'Major Mono Display', monospace`,
+        fontWeight: "bold"
+      },
+    }
+  })
+
   return (
+    <ThemeProvider theme={THEME}>
     <ApolloProvider client={client}>
       <Router>
         <>
@@ -59,7 +83,7 @@ function App() {
       </Router>
       
     </ApolloProvider>
-    
+    </ThemeProvider>
   );
 }
 
