@@ -40,7 +40,7 @@ export default function CodePage() {
             margin: 1, 
           }}
       >
-        <Box sx={{flexGrow: 2, margin: 2}}>
+        <Box sx={{ flexGrow: 2, margin: 2}}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center", mb:4}} gutterBottom>
             Update Snippet Form
           </Typography>
@@ -48,7 +48,7 @@ export default function CodePage() {
           <UpdateSnippetForm props={data}/>
         </Box>
 
-        <Box sx={{ margin: 2 }}>
+        <Box sx={{ flexGrow: 2, margin: 2 }}>
           <Typography color="text.secondary" variant="h2" sx={{textAlign: "center", mb:4}} gutterBottom>
             {data.snippetById.name} 
           </Typography>

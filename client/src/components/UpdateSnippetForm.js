@@ -103,8 +103,8 @@ function UpdateSnippetForm({props}){
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '75%' },
-                flexGrow: 1,
                 textAlign: 'center',
+                flexGrow: 1,
             }}
             noValidate
             autoComplete="off"
@@ -158,6 +158,7 @@ function UpdateSnippetForm({props}){
                 sx={{width: "75%", m:0.5}}>
                 Update This Snippet
             </Button>
+            <br/>
             <Button 
                 variant="contained" 
                 color="primary" 
