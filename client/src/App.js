@@ -13,9 +13,12 @@ import CodePage from "./pages/CodePage";
 import UserCodePage from "./pages/UserCodePage";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {Box } from "@mui/material"
 import "./assets/css/borderBox.css";
 import './assets/css/fonts.css';
 
+// Image from https://loading.io/pattern/
+import BackgroundImage from "./assets/images/code.png"
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -47,6 +50,22 @@ function App() {
       secondary: {
         main: '#f50057',
       },
+      background: {
+        default: "black",
+      }
+    },
+
+    components: {
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: "0px",
+          }
+        },
+        defaultProps: {
+          elevation: 0,
+        }
+      }
     },
     typography: {
       "fontFamily": "DM Sans",
@@ -59,30 +78,33 @@ function App() {
 
   return (
     <ThemeProvider theme={THEME}>
-    <ApolloProvider client={client}>
-      <Router>
-        <>
-        <Navbar />
+      <ApolloProvider client={client}>
+        <Router>
+          <Box sx={{
+            backgroundImage: `url(${BackgroundImage})`,
+            backgroundColor: "rgba(77, 77, 77, 0.4)",
+          }}>
+          <Navbar />
 
-          {/*switch with routing / = homepage /me = dashboard /singlepost = individual snippet /usersinglepost = user indivudal snippet*/}
-        <Routes>
-          
-          <Route exact path='/' element={<Homepage/>} />
+            {/*switch with routing / = homepage /me = dashboard /singlepost = individual snippet /usersinglepost = user indivudal snippet*/}
+          <Routes>
+            
+            <Route exact path='/' element={<Homepage/>} />
 
-          <Route exact path="/me" element={<Dashboard/>} /> 
+            <Route exact path="/me" element={<Dashboard/>} /> 
 
-          <Route exact path="/login" element={<Login/>} /> 
+            <Route exact path="/login" element={<Login/>} /> 
 
-          <Route exact path="/:id" element={<CodePage/>} />
+            <Route exact path="/:id" element={<CodePage/>} />
 
-          <Route exact path="/me/:id" element={<UserCodePage/>} />
+            <Route exact path="/me/:id" element={<UserCodePage/>} />
 
-        </Routes>
+          </Routes>
 
-      </>
-      </Router>
-      
-    </ApolloProvider>
+        </Box>
+        </Router>
+        
+      </ApolloProvider>
     </ThemeProvider>
   );
 }
