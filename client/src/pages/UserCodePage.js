@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams } from "react-router-dom"
-import { useQuery, useMutation } from '@apollo/client';
-
+import { useParams, Navigate } from "react-router-dom"
+import { useQuery } from '@apollo/client';
+import { GET_ME, GET_USER } from '../utils/queries';
 import { SNIPPET_BY_ID } from '../utils/queries';
-import { formatDate } from "../utils/date"
+import Auth from '../utils/auth';
 
+import { formatDate } from "../utils/date"
 
 import {Typography, Box, Container} from '@mui/material';
 
@@ -13,7 +14,7 @@ import UpdateSnippetForm from "../components/UpdateSnippetForm"
 
 export default function CodePage() {
   //Query for data
-  const { id } = useParams()
+  const { id, username: userParam } = useParams()
   const { loading, data } = useQuery(SNIPPET_BY_ID, {
     variables: {
       _id: id
@@ -21,8 +22,30 @@ export default function CodePage() {
     fetchPolicy: "no-cache",
   });
 
+  const {loadingUser, userData } = useQuery(userParam ? GET_USER : GET_ME, {
+    variables: {username: userParam}
+  });
+
+  // redirect to personal profile page if username is yours
+  if (!Auth.loggedIn() || Auth.getProfile().data.username !== userParam ) {
+    return <Navigate to={`/${id}`} />;
+  }
+
   return (
-    loading ? (<p>Loading</p>) : 
+    loading ? (
+    <Container sx={{ 
+      borderLeft: 1, 
+      borderRight: 1, 
+      pt: 3, 
+      backgroundColor: "white", 
+      minHeight: "calc(100vh - 64px)" 
+      }}
+    >
+      <Typography color="text.secondary" variant="h2" sx={{textAlign: "center", mb:4}} gutterBottom>
+          Loading...
+        </Typography>
+    </Container>
+      ) : 
     <Container sx={{ 
       borderLeft: 1, 
       borderRight: 1, 
@@ -43,7 +66,7 @@ export default function CodePage() {
         <Box sx={{ flexGrow: 2, margin: 2}}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center", mb:4}} gutterBottom>
             Update Snippet Form
-          </Typography>
+        </Typography>
 
           <UpdateSnippetForm props={data}/>
         </Box>
@@ -71,9 +94,6 @@ export default function CodePage() {
             </Typography>
             <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
               Language: {data.snippetById.language}
-            </Typography>
-            <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
-              Created By: {data.snippetById.userId.username}
             </Typography>
           </Box>
 

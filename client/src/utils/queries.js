@@ -17,6 +17,24 @@ query{
     }
 }`
 
+export const GET_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+        _id
+        username
+        email
+        codeSnippets{
+            _id
+            name
+            description
+            language
+            code
+            createdOn
+        }
+    }
+}`;
+
+
 export const SNIPPETS = gql`
     query{
         snippets{

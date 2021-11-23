@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 import {
@@ -117,7 +118,11 @@ export default function LoginForm() {
     });
   };
     
-  return (
+  return (Auth.loggedIn()) ? 
+  (
+    <Navigate to="/" />
+  ) : 
+  (
     <Container 
         sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}
     >
