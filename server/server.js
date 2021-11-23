@@ -24,7 +24,10 @@ server.start().then(() => {
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-// ToDo Add in our static here
+//Add in our static dependencies here
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"))
