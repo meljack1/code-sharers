@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
-import {Typography, Box, Container} from '@mui/material/';
+import {Typography, Box, Container, CircularProgress} from '@mui/material/';
 
 import { formatDate } from "../utils/date"
 
@@ -19,7 +19,11 @@ export default function CodePage() {
   });
 
   return (
-    loading ? (<p>Loading</p>) : 
+    loading ? (
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+      <CircularProgress />
+    </Container>
+      ) : 
     <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
       <Box sx={{ margin: 2 }}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center"}} gutterBottom>
