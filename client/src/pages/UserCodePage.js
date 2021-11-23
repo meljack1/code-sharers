@@ -27,7 +27,7 @@ export default function CodePage() {
 
 
   // redirect to personal profile page if username is yours
-  if (!Auth.loggedIn() || Auth.getProfile().data.username !== userParam ) {
+  if (!Auth.loggedIn()  ) {
     return <Navigate to={`/${id}`} />;
   }
 
