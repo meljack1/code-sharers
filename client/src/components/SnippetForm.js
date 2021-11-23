@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, TextField, Button, Typography} from "@mui/material"
+import { Box, TextField, Button, Typography, InputLabel, MenuItem, Select } from "@mui/material"
 import { useMutation } from "@apollo/client"
 
 import { SAVE_SNIPPET } from "../utils/mutations"
@@ -8,51 +8,33 @@ import { SAVE_SNIPPET } from "../utils/mutations"
 
 function SnippetForm(){
     //Set our state
-    const [name, setName] =  useState("");
-    const [description, setDescription] =  useState("");
-    const [language, setLanguage] =  useState("");
-    const [code, setCode] = useState("");
+    const [input, setValues] = useState({
+        name: "",
+        description: "",
+        language: "",
+        code: ""
+    }); 
 
     //Use mutation
     const [saveSnippet, {error, data}] = useMutation(SAVE_SNIPPET);
 
-    const handleInputChange = (event) => {
-        const {target} = event;
-        const inputType = target.id;
-        const inputValue = target.value;
-
-        switch(inputType){
-            case "name":
-                setName(inputValue);
-                break;
-            case "description":
-                setDescription(inputValue);
-                break;
-            case "language":
-                setLanguage(inputValue);
-                break;
-            case "code":
-                setCode(inputValue);
-                break;
-            default:
-                console.log("Invalid Target")
-                return;
-        }
-    }
-
+    const handleInputChange = (prop) => (event) => {
+        setValues({ ...input, [prop]: event.target.value });
+    };
+    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         //handle invalid submission
-        if(!name || !description || !language || !code){
+        if(!input.name || !input.description || !input.language || !input.code){
             return false
         }
 
         const submission = {
-            name,
-            description,
-            language,
-            code
+            name: input.name,
+            description: input.description,
+            language: input.language,
+            code: input.code
         }
 
         try {
@@ -83,8 +65,7 @@ function SnippetForm(){
                 id="name"
                 label="Snippet Name"
                 placeholder="Name"
-                value={name}
-                onChange={handleInputChange}
+                onChange={handleInputChange("name")}
                 />
             </div>
             <div>
@@ -95,8 +76,7 @@ function SnippetForm(){
                 placeholder="Enter a description of your code here!"
                 multiline
                 rows={5}
-                value={description}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange("description")}/>
             </div>
             <div>
                 <TextField
@@ -104,8 +84,7 @@ function SnippetForm(){
                 id="language"
                 label="Language"
                 placeholder="Enter the coding language"
-                value={language}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange("language")}/>
             </div>
             <div>
                 <TextField
@@ -115,8 +94,7 @@ function SnippetForm(){
                 placeholder="Enter your code here!"
                 multiline
                 rows={5}
-                value={code}
-                onChange={handleInputChange}/>
+                onChange={handleInputChange("code")}/>
             </div>
             <Button 
                 type="submit"
