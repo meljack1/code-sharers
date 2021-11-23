@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import { useQuery, useMutation } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
-import { REMOVE_SNIPPET } from "../utils/mutations"
+import { formatDate } from "../utils/date"
 
-import {Typography, Button, Box, Container} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+
+import {Typography, Box, Container} from '@mui/material';
 
 import UpdateSnippetForm from "../components/UpdateSnippetForm"
 
@@ -67,7 +67,7 @@ export default function CodePage() {
             }}
           >
             <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
-              Posted on {data.snippetById.createdOn}
+              Posted on {formatDate(data.snippetById.createdOn)}
             </Typography>
             <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
               Language: {data.snippetById.language}
