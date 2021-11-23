@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Divider, Card, CardContent, Typography, Box } from "@mui/material"
+import { formatDate } from "../utils/date"
 
 export default function HomepageCard(props) {
   const bull = (
@@ -40,7 +41,7 @@ export default function HomepageCard(props) {
             {bull}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            Date posted: {props.createdOn}
+            Date posted: {formatDate(props.createdOn)}
           </Typography>
         </Box>
       </CardContent>

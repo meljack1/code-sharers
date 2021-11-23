@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/client';
 import { SNIPPET_BY_ID } from '../utils/queries';
 import {Typography, Box, Container} from '@mui/material/';
 
+import { formatDate } from "../utils/date"
+
 export default function CodePage() {
 
   const { id } = useParams()
@@ -38,7 +40,7 @@ export default function CodePage() {
           }}
         >
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
-            Posted on {data.snippetById.createdOn}
+            Posted on {formatDate(data.snippetById.createdOn)}
           </Typography>
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
             Language: {data.snippetById.language}

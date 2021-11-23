@@ -8,6 +8,7 @@ import { GET_ME } from "../utils/queries"
 import SnippetForm from "../components/SnippetForm"
 
 import Auth from "../utils/auth";
+import { formatDate } from "../utils/date";
 
 const Dashboard = () => {
   //add in me query here
@@ -66,7 +67,7 @@ const Dashboard = () => {
                         }}
                       >
                       <Typography color="text.secondary">
-                        Posted on {snippet.createdOn}
+                        Posted on {formatDate(snippet.createdOn)}
                       </Typography>
                       <Typography>
                         {bull}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import {Box, Typography, Container, Divider} from '@mui/material';
+
 import { SNIPPETS } from '../utils/queries';
 import HomepageCard from "../components/HomepageCard";
-import {Box, Typography, Container, Divider} from '@mui/material';
 
 export default function Homepage() {
     const { loading, data } = useQuery(SNIPPETS, {
