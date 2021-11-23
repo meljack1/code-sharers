@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { ADD_USER, LOGIN_USER } from '../utils/mutations';
-import { GET_ME } from '../utils/queries';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {
     Alert, 
     Container, 
