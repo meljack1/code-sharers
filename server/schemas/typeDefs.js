@@ -16,6 +16,13 @@ const typeDefs = gql`
         code: String
         createdOn: String
         userId: User
+        comments: [Comment]
+    }
+    type Comment{
+        _id: ID
+        commentText: String
+        commentAuthor: String
+        commentDate: String
     }
     input SnippetInput{
         name: String
@@ -46,6 +53,7 @@ const typeDefs = gql`
         saveSnippet(input: SnippetInput!) : User
         updateSnippet(input: updatedSnippetInput!) : Snippet
         removeSnippet(_id: ID!): User
+        addComment(_id: ID!, commentText: String!): Snippet
     }
 `;
 
