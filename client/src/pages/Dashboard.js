@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Navigate } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { Container, Card, Typography, CardContent, Link, Box, Divider } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
@@ -7,11 +8,10 @@ import { GET_ME } from "../utils/queries"
 
 import SnippetForm from "../components/SnippetForm"
 
-import Auth from "../utils/auth";
-
 const Dashboard = () => {
   //add in me query here
   const { loading, data } = useQuery(GET_ME)
+  const user = data?.me || {};
 
   const bull = (
     <Box
@@ -22,11 +22,23 @@ const Dashboard = () => {
     </Box>
   );
 
-  return (loading) ? <h1>Loading</h1> : (
+  return (!user?.username) ? 
+    (
+      <Navigate to="/" />
+    ) : 
+    ((loading) ? 
+    (
+    <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+      <Typography variant="h2" sx={{ textAlign: "center", fontSize: "6ch", p: 1, pb: 4 }}> 
+        Please log in to view this page.
+      </Typography>
+    </Container>
+    ) : 
+    (
     <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
       <Typography variant="h2" sx={{ textAlign: "center", fontSize: "6ch", p: 1, pb: 4 }}> 
         Welcome, {data.me.username}!
-        </Typography>
+      </Typography>
       <Box 
         sx={{ 
           display: "flex", 
@@ -84,7 +96,7 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Container>
-  )
+  ))
 }
 
 export default Dashboard;
