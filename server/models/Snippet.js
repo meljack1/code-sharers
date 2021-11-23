@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const commentSchema = require("./Comment")
+
 const snippetSchema = new Schema({
   name: {
     type: String,
@@ -25,6 +27,7 @@ const snippetSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  comments: [commentSchema]
 });
 
 const Snippet = mongoose.model("Snippet", snippetSchema);
