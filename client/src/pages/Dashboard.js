@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (!user?.username) ? 
     (
-      <Navigate to="/" />
+      <Navigate to="/login" />
     ) : 
     ((loading) ? 
     (
