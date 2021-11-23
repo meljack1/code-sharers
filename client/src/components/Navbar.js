@@ -51,7 +51,7 @@ export default function ButtonAppBar() {
                 <Link href="/me">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">My Page</Button>
                 </Link>
-                {Auth.loggedIn() ? (
+                {!Auth.loggedIn() ? (
                 <Link href="/login">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Login</Button>
                 </Link>):(   
@@ -92,7 +92,7 @@ export default function ButtonAppBar() {
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}> 
-                {Auth.loggedIn() ? (
+                {!Auth.loggedIn() ? (
                   <Link href="/login" underline="none" color="inherit">
                     Login
                   </Link>):(

@@ -86,6 +86,7 @@ function SnippetForm(){
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Language"
+                    value={input.language}
                     onChange={handleInputChange("language")}
                     >
                     <MenuItem value={"HTML"}>HTML</MenuItem>
