@@ -65,12 +65,12 @@ export default function ButtonAppBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={handleClick}
             >
               <MenuIcon 
                 aria-controls="basic-menu"
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
               />
               <Menu
                 id="basic-menu"
