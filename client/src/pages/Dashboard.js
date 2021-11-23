@@ -3,11 +3,12 @@ import { Navigate } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { Container, Card, Typography, CardContent, Link, Box, Divider } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
-import Auth from "../utils/auth.js";
-
 import { GET_ME } from "../utils/queries"
 
 import SnippetForm from "../components/SnippetForm"
+
+import Auth from "../utils/auth";
+import { formatDate } from "../utils/date";
 
 const Dashboard = () => {
   //add in me query here
@@ -78,7 +79,7 @@ const Dashboard = () => {
                         }}
                       >
                       <Typography color="text.secondary">
-                        Posted on {snippet.createdOn}
+                        Posted on {formatDate(snippet.createdOn)}
                       </Typography>
                       <Typography>
                         {bull}

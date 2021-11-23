@@ -3,10 +3,17 @@ import { useParams, Navigate } from "react-router-dom"
 import { useQuery } from '@apollo/client';
 import { GET_ME, GET_USER } from '../utils/queries';
 import { SNIPPET_BY_ID } from '../utils/queries';
+<<<<<<< HEAD
 import Auth from '../utils/auth';
 
 import {Typography, Box, Container} from '@mui/material';
 
+=======
+import { formatDate } from "../utils/date"
+
+
+import {Typography, Box, Container} from '@mui/material';
+>>>>>>> ea64bf05cbe53c2d23ace36a0c722724f12d9bbf
 
 import UpdateSnippetForm from "../components/UpdateSnippetForm"
 
@@ -89,7 +96,7 @@ export default function CodePage() {
             }}
           >
             <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
-              Posted on {data.snippetById.createdOn}
+              Posted on {formatDate(data.snippetById.createdOn)}
             </Typography>
             <Typography sx={{ fontSize: "2.5ch", mx: 1 }} color="text.secondary">
               Language: {data.snippetById.language}
