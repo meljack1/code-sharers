@@ -62,5 +62,10 @@ export const SNIPPET_BY_ID = gql`
         userId {
             username
             }
+        comments{
+            commentText
+            commentAuthor
+            commentDate
+        }
         }
     }`
