@@ -10,6 +10,9 @@ const resolvers = {
             }
             throw new AuthenticationError("You must be logged in to view this!");
         },
+        user: async (parent, { username }) => {
+            return User.findOne({ username }).populate("codeSnippets");
+        },
         snippets: async (parent, args, context) => {
             return Snippet.find().populate("userId")
         },
