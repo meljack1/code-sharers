@@ -14,7 +14,7 @@ import UpdateSnippetForm from "../components/UpdateSnippetForm"
 
 export default function CodePage() {
   //Query for data
-  const { id, username: userParam } = useParams()
+  const { id } = useParams()
   const { loading, data } = useQuery(SNIPPET_BY_ID, {
     variables: {
       _id: id
@@ -22,13 +22,13 @@ export default function CodePage() {
     fetchPolicy: "no-cache",
   });
 
-  const {loadingUser, userData } = useQuery(userParam ? GET_USER : GET_ME, {
-    variables: {username: userParam}
-  });
 
   // redirect to personal profile page if username is yours
-  if (!Auth.loggedIn() || Auth.getProfile().data.username !== userParam ) {
-    return <Navigate to={`/${id}`} />;
+  if (!loading) {
+    console.log(data.userId)
+    if (!Auth.loggedIn() || Auth.getProfile().data.username !== data.snippetById.userId.username ) {
+      return <Navigate to={`/${id}`} />;
+    }
   }
 
   return (
