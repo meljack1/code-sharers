@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { Container, Card, Typography, CardContent, Link, Box, Divider } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
+import Auth from "../utils/auth.js";
 
 import { GET_ME } from "../utils/queries"
 
@@ -11,7 +12,6 @@ import SnippetForm from "../components/SnippetForm"
 const Dashboard = () => {
   //add in me query here
   const { loading, data } = useQuery(GET_ME)
-  const user = data?.me || {};
 
   const bull = (
     <Box
@@ -22,7 +22,7 @@ const Dashboard = () => {
     </Box>
   );
 
-  return (!user?.username) ? 
+  return (!Auth.loggedIn()) ? 
     (
       <Navigate to="/login" />
     ) : 
