@@ -41,7 +41,9 @@ export default function ButtonAppBar() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+              <Link href="/" underline="none" color="inherit">
               codeShare.
+              </Link>
             </Typography>
             {largeScreen ? (
               <Box>
