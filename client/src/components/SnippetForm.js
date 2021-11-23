@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, TextField, Button, Typography, InputLabel, MenuItem, Select } from "@mui/material"
+import { Box, TextField, Button, Typography, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { useMutation } from "@apollo/client"
 
 import { SAVE_SNIPPET } from "../utils/mutations"
@@ -51,6 +51,7 @@ function SnippetForm(){
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '75%' },
+                '& .MuiFormControl-root': { m: 1, width: '75%' },
                 flexGrow: 1,
                 textAlign: 'center',
             }}
@@ -59,7 +60,7 @@ function SnippetForm(){
             onSubmit={handleFormSubmit}
         >
             <Typography variant="h3" sx={{ mb: 4}}> Create a new snippet: </Typography>
-            <div>
+            <Box>
                 <TextField
                 required
                 id="name"
@@ -67,8 +68,8 @@ function SnippetForm(){
                 placeholder="Name"
                 onChange={handleInputChange("name")}
                 />
-            </div>
-            <div>
+            </Box>
+            <Box>
                 <TextField
                 required
                 id="description"
@@ -77,16 +78,31 @@ function SnippetForm(){
                 multiline
                 rows={5}
                 onChange={handleInputChange("description")}/>
-            </div>
-            <div>
-                <TextField
-                required
-                id="language"
-                label="Language"
-                placeholder="Enter the coding language"
-                onChange={handleInputChange("language")}/>
-            </div>
-            <div>
+            </Box>
+            <Box>
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Language</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Language"
+                    onChange={handleInputChange("language")}
+                    >
+                    <MenuItem value={"HTML"}>HTML</MenuItem>
+                    <MenuItem value={"CSS"}>CSS</MenuItem>
+                    <MenuItem value={"JavaScript"}>JavaScript</MenuItem>
+                    <MenuItem value={"TypeScript"}>TypeScript</MenuItem>
+                    <MenuItem value={"Python"}>Python</MenuItem>
+                    <MenuItem value={"C++"}>C++</MenuItem>
+                    <MenuItem value={"C"}>C</MenuItem>
+                    <MenuItem value={"C#"}>C#</MenuItem>
+                    <MenuItem value={"Ruby"}>Ruby</MenuItem>
+                    <MenuItem value={"Java"}>Java</MenuItem>
+                    <MenuItem value={"PHP"}>PHP</MenuItem>
+                </Select>
+            </FormControl>
+            </Box>
+            <Box>
                 <TextField
                 required
                 id="code"
@@ -95,7 +111,7 @@ function SnippetForm(){
                 multiline
                 rows={5}
                 onChange={handleInputChange("code")}/>
-            </div>
+            </Box>
             <Button 
                 type="submit"
                 variant="contained"
