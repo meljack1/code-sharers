@@ -12,7 +12,7 @@ export default function HomepageCard(props) {
     </Box>
   );
   return (
-    <Card>
+    <Card key={props._id}>
       <CardContent>
         <Typography color="text.secondary" variant="h5" gutterBottom>
           <Link href={`/${props._id}`}>{props.name}</Link> 
