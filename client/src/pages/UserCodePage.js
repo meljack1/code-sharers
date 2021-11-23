@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 
 import { formatDate } from "../utils/date"
 
-import {Typography, Box, Container} from '@mui/material';
+import {Typography, Box, Container, CircularProgress} from '@mui/material';
 
 import UpdateSnippetForm from "../components/UpdateSnippetForm"
 
@@ -33,19 +33,10 @@ export default function CodePage() {
 
   return (
     loading ? (
-    <Container sx={{ 
-      borderLeft: 1, 
-      borderRight: 1, 
-      pt: 3, 
-      backgroundColor: "white", 
-      minHeight: "calc(100vh - 64px)" 
-      }}
-    >
-      <Typography color="text.secondary" variant="h2" sx={{textAlign: "center", mb:4}} gutterBottom>
-          Loading...
-        </Typography>
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+      <CircularProgress />
     </Container>
-      ) : 
+    ) : 
     <Container sx={{ 
       borderLeft: 1, 
       borderRight: 1, 
