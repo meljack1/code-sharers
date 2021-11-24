@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, TextField, Button, Typography} from "@mui/material"
+import { Box, TextField, Button, Typography, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { useMutation } from "@apollo/client"
 
 import { SAVE_SNIPPET } from "../utils/mutations"
@@ -8,51 +8,33 @@ import { SAVE_SNIPPET } from "../utils/mutations"
 
 function SnippetForm(){
     //Set our state
-    const [name, setName] =  useState("");
-    const [description, setDescription] =  useState("");
-    const [language, setLanguage] =  useState("");
-    const [code, setCode] = useState("");
+    const [input, setValues] = useState({
+        name: "",
+        description: "",
+        language: "",
+        code: ""
+    }); 
 
     //Use mutation
     const [saveSnippet, {error, data}] = useMutation(SAVE_SNIPPET);
 
-    const handleInputChange = (event) => {
-        const {target} = event;
-        const inputType = target.id;
-        const inputValue = target.value;
-
-        switch(inputType){
-            case "name":
-                setName(inputValue);
-                break;
-            case "description":
-                setDescription(inputValue);
-                break;
-            case "language":
-                setLanguage(inputValue);
-                break;
-            case "code":
-                setCode(inputValue);
-                break;
-            default:
-                console.log("Invalid Target")
-                return;
-        }
-    }
-
+    const handleInputChange = (prop) => (event) => {
+        setValues({ ...input, [prop]: event.target.value });
+    };
+    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         //handle invalid submission
-        if(!name || !description || !language || !code){
+        if(!input.name || !input.description || !input.language || !input.code){
             return false
         }
 
         const submission = {
-            name,
-            description,
-            language,
-            code
+            name: input.name,
+            description: input.description,
+            language: input.language,
+            code: input.code
         }
 
         try {
@@ -69,6 +51,7 @@ function SnippetForm(){
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '75%' },
+                '& .MuiFormControl-root': { m: 1, width: '75%' },
                 flexGrow: 1,
                 textAlign: 'center',
             }}
@@ -77,17 +60,16 @@ function SnippetForm(){
             onSubmit={handleFormSubmit}
         >
             <Typography variant="h3" sx={{ mb: 4}}> Create a new snippet: </Typography>
-            <div>
+            <Box>
                 <TextField
                 required
                 id="name"
                 label="Snippet Name"
                 placeholder="Name"
-                value={name}
-                onChange={handleInputChange}
+                onChange={handleInputChange("name")}
                 />
-            </div>
-            <div>
+            </Box>
+            <Box>
                 <TextField
                 required
                 id="description"
@@ -95,19 +77,33 @@ function SnippetForm(){
                 placeholder="Enter a description of your code here!"
                 multiline
                 rows={5}
-                value={description}
-                onChange={handleInputChange}/>
-            </div>
-            <div>
-                <TextField
-                required
-                id="language"
-                label="Language"
-                placeholder="Enter the coding language"
-                value={language}
-                onChange={handleInputChange}/>
-            </div>
-            <div>
+                onChange={handleInputChange("description")}/>
+            </Box>
+            <Box>
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Language</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Language"
+                    value={input.language}
+                    onChange={handleInputChange("language")}
+                    >
+                    <MenuItem value={"HTML"}>HTML</MenuItem>
+                    <MenuItem value={"CSS"}>CSS</MenuItem>
+                    <MenuItem value={"JavaScript"}>JavaScript</MenuItem>
+                    <MenuItem value={"TypeScript"}>TypeScript</MenuItem>
+                    <MenuItem value={"Python"}>Python</MenuItem>
+                    <MenuItem value={"C++"}>C++</MenuItem>
+                    <MenuItem value={"C"}>C</MenuItem>
+                    <MenuItem value={"C#"}>C#</MenuItem>
+                    <MenuItem value={"Ruby"}>Ruby</MenuItem>
+                    <MenuItem value={"Java"}>Java</MenuItem>
+                    <MenuItem value={"PHP"}>PHP</MenuItem>
+                </Select>
+            </FormControl>
+            </Box>
+            <Box>
                 <TextField
                 required
                 id="code"
@@ -115,9 +111,8 @@ function SnippetForm(){
                 placeholder="Enter your code here!"
                 multiline
                 rows={5}
-                value={code}
-                onChange={handleInputChange}/>
-            </div>
+                onChange={handleInputChange("code")}/>
+            </Box>
             <Button 
                 type="submit"
                 variant="contained"

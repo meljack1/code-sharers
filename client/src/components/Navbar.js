@@ -13,6 +13,7 @@ import {
   useMediaQuery
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Auth from '../utils/auth';
 
 export default function ButtonAppBar() {
     // Import theme to use breakpoints
@@ -30,13 +31,19 @@ export default function ButtonAppBar() {
     const handleClose = () => {
       setAnchorEl(null);
     };
+      const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+      };
 
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+              <Link href="/" underline="none" color="inherit">
               codeShare.
+              </Link>
             </Typography>
             {largeScreen ? (
               <Box>
@@ -46,9 +53,13 @@ export default function ButtonAppBar() {
                 <Link href="/me">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">My Page</Button>
                 </Link>
+                {!Auth.loggedIn() ? (
                 <Link href="/login">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Login</Button>
-                </Link>
+                </Link>):(   
+                <Link onClick={logout}>
+                <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Logout</Button>
+              </Link>)}
               </Box>
             ) : ( 
               <IconButton
@@ -56,12 +67,12 @@ export default function ButtonAppBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={handleClick}
             >
               <MenuIcon 
                 aria-controls="basic-menu"
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
               />
               <Menu
                 id="basic-menu"
@@ -82,10 +93,14 @@ export default function ButtonAppBar() {
                     My Page
                   </Link>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleClose}> 
+                {!Auth.loggedIn() ? (
                   <Link href="/login" underline="none" color="inherit">
                     Login
-                  </Link>
+                  </Link>):(
+                  <Link onClick={logout}  underline="none" color="inherit">
+                  Logout
+                </Link>)}
                 </MenuItem>
               </Menu>
               </IconButton>

@@ -14,7 +14,7 @@ import CommentForm from "../components/CommentForm"
 
 export default function CodePage() {
   //Query for data
-  const { id, username: userParam } = useParams()
+  const { id } = useParams()
   const { loading, data } = useQuery(SNIPPET_BY_ID, {
     variables: {
       _id: id
@@ -22,36 +22,26 @@ export default function CodePage() {
     fetchPolicy: "no-cache",
   });
 
-  const { loadingUser, userData } = useQuery(userParam ? GET_USER : GET_ME, {
-    variables: { username: userParam }
-  });
-
   // redirect to personal profile page if username is yours
-  if (!Auth.loggedIn() || Auth.getProfile().data.username !== userParam) {
-    return <Navigate to={`/${id}`} />;
+  if (!loading) {
+    console.log(data.userId)
+    if (!Auth.loggedIn() || Auth.getProfile().data.username !== data.snippetById.userId.username ) {
+      return <Navigate to={`/${id}`} />;
+    }
   }
 
   return (
     loading ? (
-      <Container sx={{
-        borderLeft: 1,
-        borderRight: 1,
-        pt: 3,
-        backgroundColor: "white",
-        minHeight: "calc(100vh - 64px)"
-      }}
-      >
-        <Typography color="text.secondary" variant="h2" sx={{ textAlign: "center", mb: 4 }} gutterBottom>
-          Loading...
-        </Typography>
-      </Container>
-    ) :
-      <Container sx={{
-        borderLeft: 1,
-        borderRight: 1,
-        pt: 3,
-        backgroundColor: "white",
-        minHeight: "calc(100vh - 64px)"
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+      <CircularProgress />
+    </Container>
+    ) : 
+    <Container sx={{ 
+      borderLeft: 1, 
+      borderRight: 1, 
+      pt: 3, 
+      backgroundColor: "white", 
+      minHeight: "calc(100vh - 64px)" 
       }}
       >
         <Box
