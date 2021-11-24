@@ -64,3 +64,20 @@ export const UPDATE_SNIPPET = gql`
             code
         }
     }`
+
+export const ADD_COMMENT = gql`
+    mutation addComment($_id: ID!, $commentText: String!){
+        addComment(_id: $_id, commentText: $commentText){
+            _id
+            name
+            description
+            language
+            code
+            comments{
+                commentText
+                commentDate
+                commentAuthor
+            }
+        
+        }
+    }`

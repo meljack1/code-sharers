@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/client';
 import { SNIPPET_BY_ID } from '../utils/queries';
 import {Typography, Box, Container, Card, CardContent} from '@mui/material/';
 
+import CommentForm from "../components/CommentForm"
+
 import { formatDate } from "../utils/date"
 
 export default function CodePage() {
@@ -50,6 +52,8 @@ export default function CodePage() {
           </Typography>
 
         </Box>
+
+        <CommentForm/>
 
         <Box>
         {data.snippetById.comments.map((comment)=> {
