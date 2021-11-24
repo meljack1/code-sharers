@@ -54,7 +54,7 @@ const Dashboard = () => {
             <Box sx={{overflow: "auto"}}>
               {data.me.codeSnippets.map(snippet => {
                 return (
-                  <Card sx={{ margin: 2 }}>
+                  <Card key={snippet._id} sx={{ margin: 2 }}>
                     <CardContent>
                       <Typography color="text.secondary" variant="h5" gutterBottom>
                         <Link underline="none" href={`/me/${snippet._id}`}>

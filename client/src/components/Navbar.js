@@ -41,7 +41,9 @@ export default function ButtonAppBar() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
+              <Link href="/" underline="none" color="inherit">
               codeShare.
+              </Link>
             </Typography>
             {largeScreen ? (
               <Box>
@@ -51,7 +53,7 @@ export default function ButtonAppBar() {
                 <Link href="/me">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">My Page</Button>
                 </Link>
-                {Auth.loggedIn() ? (
+                {!Auth.loggedIn() ? (
                 <Link href="/login">
                   <Button sx={{color: "white", fontSize: "2.3ch", mx: 2.5, pt: 1}} color="inherit">Login</Button>
                 </Link>):(   
@@ -65,12 +67,12 @@ export default function ButtonAppBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
+              onClick={handleClick}
             >
               <MenuIcon 
                 aria-controls="basic-menu"
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
               />
               <Menu
                 id="basic-menu"
@@ -92,7 +94,7 @@ export default function ButtonAppBar() {
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}> 
-                {Auth.loggedIn() ? (
+                {!Auth.loggedIn() ? (
                   <Link href="/login" underline="none" color="inherit">
                     Login
                   </Link>):(
