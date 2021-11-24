@@ -1,12 +1,11 @@
 import React from 'react';
 import { useParams, Navigate } from "react-router-dom"
 import { useQuery } from '@apollo/client';
-import { GET_ME, GET_USER } from '../utils/queries';
 import { SNIPPET_BY_ID } from '../utils/queries';
 import Auth from '../utils/auth';
 import { formatDate } from "../utils/date"
 
-import { Typography, Box, Container, Card, CardContent } from '@mui/material';
+import { Typography, Box, Container, Card, CardContent, CircularProgress } from '@mui/material';
 
 import UpdateSnippetForm from "../components/UpdateSnippetForm"
 import CommentForm from "../components/CommentForm"

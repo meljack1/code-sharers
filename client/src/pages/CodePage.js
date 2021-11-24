@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
 
-import {Typography, Box, Container, Card, CardContent} from '@mui/material/';
+import {Typography, Box, Container, Card, CardContent, CircularProgress} from '@mui/material/';
 
 import CommentForm from "../components/CommentForm"
 
