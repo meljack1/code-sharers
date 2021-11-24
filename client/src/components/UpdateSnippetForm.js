@@ -83,7 +83,6 @@ function UpdateSnippetForm({props}){
   const [removeSnippet, { removeError }] = useMutation(REMOVE_SNIPPET)
   const handleDelete = async () => {
     const _id = id
-    console.log(_id)
     try {
       const {data} = await removeSnippet({
         variables: {_id} 

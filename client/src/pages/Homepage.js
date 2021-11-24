@@ -11,7 +11,7 @@ export default function Homepage() {
     });
 
     const snippetList = data?.snippets || [];
-    console.log(snippetList)
+    
   return (
     <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
         <Typography variant="h2" sx={{ pb: 3 }}>
