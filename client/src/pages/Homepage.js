@@ -11,7 +11,7 @@ export default function Homepage() {
     });
 
     const snippetList = data?.snippets || [];
-    console.log(snippetList)
+
   return (loading) ? (
     <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
       <CircularProgress />

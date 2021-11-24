@@ -57,7 +57,6 @@ export default function LoginForm() {
 // Logic to login a user
   const handleLoginUser = async (event) => {
     event.preventDefault();
-    console.log(loginInput);
     setLoginErrorVisible(false);
     setSignupErrorVisible(false);
 

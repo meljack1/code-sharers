@@ -17,7 +17,7 @@ const resolvers = {
             return Snippet.find().populate("userId")
         },
         snippetById: async (parent, args) => {
-            return Snippet.findById(args._id).populate("userId")
+            return Snippet.findById(args._id).populate("userId").populate("comments")
         },
     },
     Mutation: {
@@ -90,6 +90,21 @@ const resolvers = {
             }
 
             throw new AuthenticationError("You are not logged in!")
+        },
+        addComment: async(parent, {_id, commentText} , context) => {
+            if(context.user){
+                const commentAuthor = context.user.username;
+                const commentDate = Date.now()
+
+                const snippet = await Snippet.findOneAndUpdate(
+                    {_id},
+                    {$addToSet: {comments: {commentText, commentAuthor, commentDate}}},
+                    {new: true, runValidators: true}
+
+                ).populate("comments")
+
+                return snippet
+            }
         }
     }
 };
