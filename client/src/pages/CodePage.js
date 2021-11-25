@@ -56,7 +56,7 @@ export default function CodePage() {
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
             Posted on {formatDate(data.snippetById.createdOn)}
           </Typography>
-          <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+          <Typography sx={{ fontSize: "2.5ch" }}>
             Language: {data.snippetById.language}
           </Typography>
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
@@ -82,7 +82,7 @@ export default function CodePage() {
                 <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
                   User {comment.commentAuthor} posted: 
                 </Typography>
-                <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+                <Typography sx={{ fontSize: "3ch", m: 1 }}>
                   {comment.commentText} 
                 </Typography>
                 <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
