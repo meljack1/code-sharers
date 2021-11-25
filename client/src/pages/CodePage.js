@@ -4,10 +4,10 @@ import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
 
-import {Typography, Box, Container, Card, CardContent, CircularProgress} from '@mui/material/';
+import {Typography, Box, Container, Card, CardContent, CircularProgress, Divider, Button, Link} from '@mui/material/';
 
 import CommentForm from "../components/CommentForm"
-
+import Auth from '../utils/auth';
 
 import { formatDate } from "../utils/date"
 
@@ -33,9 +33,9 @@ export default function CodePage() {
       borderRight: 1, 
       pt: "85px", 
       backgroundColor: "white", 
-      minHeight: "80vh"
+      minHeight: "100vh"
      }}>
-      <Box sx={{ margin: 2 }}>
+      <Box sx={{ m: 2, mx: "auto", width: "85%" }}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center"}} gutterBottom>
           {data.snippetById.name} 
         </Typography>
@@ -56,7 +56,7 @@ export default function CodePage() {
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
             Posted on {formatDate(data.snippetById.createdOn)}
           </Typography>
-          <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+          <Typography sx={{ fontSize: "2.5ch" }}>
             Language: {data.snippetById.language}
           </Typography>
           <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
@@ -64,8 +64,15 @@ export default function CodePage() {
           </Typography>
 
         </Box>
-
-        <CommentForm/>
+        
+        {Auth.loggedIn() ? <CommentForm/> : (
+          <Box sx={{mb: 6, mt: 6}}>
+            <Divider />
+            <Typography sx={{ fontSize: "3ch", mt: 3, mb: 1 }}>
+              You must be logged in to leave a comment.
+            </Typography>
+          </Box>
+        )}
 
         <Box>
         {data.snippetById.comments.map((comment)=> {
@@ -75,7 +82,7 @@ export default function CodePage() {
                 <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
                   User {comment.commentAuthor} posted: 
                 </Typography>
-                <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
+                <Typography sx={{ fontSize: "3ch", m: 1 }}>
                   {comment.commentText} 
                 </Typography>
                 <Typography sx={{ fontSize: "2.5ch" }} color="text.secondary">
