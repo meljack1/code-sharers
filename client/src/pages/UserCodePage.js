@@ -31,16 +31,16 @@ export default function CodePage() {
 
   return (
     loading ? (
-    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "calc(10vh + 64px)", backgroundColor: "white", minHeight: "100vh" }}>
       <CircularProgress />
     </Container>
     ) : 
     <Container sx={{ 
       borderLeft: 1, 
       borderRight: 1, 
-      pt: 3, 
+      pt: "85px", 
       backgroundColor: "white", 
-      minHeight: "calc(100vh - 64px)" 
+      minHeight: "100vh"
       }}
       >
         <Box

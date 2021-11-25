@@ -57,6 +57,7 @@ export default function LoginForm() {
 // Logic to login a user
   const handleLoginUser = async (event) => {
     event.preventDefault();
+    console.log(loginInput);
     setLoginErrorVisible(false);
     setSignupErrorVisible(false);
 
@@ -123,7 +124,13 @@ export default function LoginForm() {
   ) : 
   (
     <Container 
-        sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}
+        sx={{ 
+            borderLeft: 1, 
+            borderRight: 1, 
+            pt: "85px",
+            backgroundColor: "white", 
+            minHeight: "100vh"
+         }}
     >
         <Typography variant="h2" sx={{ textAlign: "center", fontSize: "6ch", p: 1, pb: 4 }}> 
             Join the codeShare community
