@@ -40,10 +40,22 @@ Then it is stored in the database, and displays on the homepage.
 
 ## Installation
 
+1. Clone the above repo to your machine
 
+2. Ensure that mongoDB is installed on your machine
+
+3. Run `npm run install` to install your dependencies
+
+4. Run `npm run develop` to start both client side and server side in development mode
+
+5. The application will render on your localhost 
 
 
 ## Usage
+
+
+/// to be added later once we have completed app 
+
 
 
 
@@ -52,10 +64,16 @@ Then it is stored in the database, and displays on the homepage.
 ## Link to Deployed 
 
 
+/// to be added later 
+
+
 
 
 
 ## Application Image 
+
+
+// to be added 
 
  
  
@@ -72,6 +90,9 @@ If you have any questions feel free to contact us here:
  
 
  ##### Email: 
+
+
+
 
 ## Testing
 
