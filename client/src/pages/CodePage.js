@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
 
-import {Typography, Box, Container, Card, CardContent, CircularProgress} from '@mui/material/';
+import {Typography, Box, Container, Card, CardContent, CircularProgress, Divider, Button, Link} from '@mui/material/';
 
 import CommentForm from "../components/CommentForm"
 import Auth from '../utils/auth';
@@ -66,9 +66,12 @@ export default function CodePage() {
         </Box>
         
         {Auth.loggedIn() ? <CommentForm/> : (
-          <Typography sx={{ fontSize: "3ch" }}>
-            You must be logged in to leave a comment.
-          </Typography>
+          <Box sx={{mb: 6, mt: 6}}>
+            <Divider />
+            <Typography sx={{ fontSize: "3ch", mt: 3, mb: 1 }}>
+              You must be logged in to leave a comment.
+            </Typography>
+          </Box>
         )}
 
         <Box>
