@@ -1,5 +1,5 @@
 import React , { useState } from "react";
-import { Box, TextField, Button, Typography} from "@mui/material"
+import { Box, TextField, Button, Typography, Divider} from "@mui/material"
 import { useParams } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 
@@ -42,21 +42,26 @@ function CommentForm(){
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '75%' },
+                '& .MuiTextField-root': { m: 1, width: '100%' },
                 flexGrow: 1,
                 textAlign: 'center',
+                mt: 6, 
+                mb: 6
             }}
             noValidate
             autoComplete="off"
             onSubmit={handleFormSubmit}
         >
-            <Typography variant="h3" sx={{ mb: 4}}> Add Your Comment: </Typography>
+            <Divider/>
+            <Typography variant="h4" sx={{ mt: 3, mb: 1, fontSize: 26, textAlign: "left" }}> Add Your Comment: </Typography>
             <div>
             <TextField
                 required
                 id="commentText"
                 label="Comment Text"
                 placeholder="Your comment here"
+                multiline
+                rows={3}
                 value={commentText}
                 onChange={handleInputChange}
                 />
@@ -65,7 +70,7 @@ function CommentForm(){
                 type="submit"
                 variant="contained"
                 color="secondary"
-                sx={{width: '75%', m: 1}}>
+                sx={{width: '100%', m: 1}}>
                 Save Comment
             </Button>
         </Box>

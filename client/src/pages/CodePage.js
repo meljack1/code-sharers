@@ -7,7 +7,7 @@ import { SNIPPET_BY_ID } from '../utils/queries';
 import {Typography, Box, Container, Card, CardContent, CircularProgress} from '@mui/material/';
 
 import CommentForm from "../components/CommentForm"
-
+import Auth from '../utils/auth';
 
 import { formatDate } from "../utils/date"
 
@@ -33,9 +33,9 @@ export default function CodePage() {
       borderRight: 1, 
       pt: "85px", 
       backgroundColor: "white", 
-      minHeight: "80vh"
+      minHeight: "100vh"
      }}>
-      <Box sx={{ margin: 2 }}>
+      <Box sx={{ m: 2, mx: "auto", width: "85%" }}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center"}} gutterBottom>
           {data.snippetById.name} 
         </Typography>
@@ -64,8 +64,12 @@ export default function CodePage() {
           </Typography>
 
         </Box>
-
-        <CommentForm/>
+        
+        {Auth.loggedIn() ? <CommentForm/> : (
+          <Typography sx={{ fontSize: "3ch" }}>
+            You must be logged in to leave a comment.
+          </Typography>
+        )}
 
         <Box>
         {data.snippetById.comments.map((comment)=> {
