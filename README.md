@@ -16,7 +16,9 @@
 
 
 
-## Description
+## User Story
+
+As a group of developers, we thought very carefully about what tools we could utilize to make the arduous task of coding more straightforward and streamlined. We decided that an application which allows developers to share snippets of their code would be a perfect place for experienced and competent developers to share their know-how and contribute to creating a platform which is a one-stop shop of code snippets in different languages which can be used by users to create their dream projects. This is what codeshare attempts to achieve, the core principles which have shaped this journey are simple, Clarity, Access and Security. Find the code snippet you need quickly and easily with codeShare and whilst you’re here why not contribute your own code snippet to help current and future developers and grow the community in the process !
 
 
 
