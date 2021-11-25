@@ -54,6 +54,7 @@ function SnippetForm(){
                 '& .MuiFormControl-root': { m: 1, width: '75%' },
                 flexGrow: 1,
                 textAlign: 'center',
+                mb: 4
             }}
             noValidate
             autoComplete="off"

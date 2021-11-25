@@ -1,7 +1,16 @@
 import React from "react";
 import { Navigate } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
-import { Container, Card, Typography, CardContent, Link, Box, Divider, CircularProgress } from '@mui/material'
+import { 
+  Container, 
+  Card, 
+  Typography, 
+  CardContent, 
+  Link, 
+  Box, 
+  Divider, 
+  CircularProgress
+ } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import { GET_ME } from "../utils/queries"
 
@@ -57,7 +66,7 @@ const Dashboard = () => {
         <Divider orientation="vertical" flexItem />
         <Box sx={{flexGrow: 2, mx: 3}}>
           <Typography variant="h3" sx={{ textAlign: "center"}}> Your snippets: </Typography>
-            <Box sx={{overflow: "auto"}}>
+            <Box sx={{ maxHeight: "60vh", overflow: "auto"}}>
               {data.me.codeSnippets.map(snippet => {
                 return (
                   <Card key={snippet._id} sx={{ margin: 2 }}>
