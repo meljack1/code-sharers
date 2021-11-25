@@ -1,12 +1,11 @@
 import React from 'react';
 import { useParams, Navigate } from "react-router-dom"
 import { useQuery } from '@apollo/client';
-import { GET_ME, GET_USER } from '../utils/queries';
 import { SNIPPET_BY_ID } from '../utils/queries';
 import Auth from '../utils/auth';
 import { formatDate } from "../utils/date"
 
-import { Typography, Box, Container, Card, CardContent } from '@mui/material';
+import { Typography, Box, Container, Card, CardContent, CircularProgress } from '@mui/material';
 
 import UpdateSnippetForm from "../components/UpdateSnippetForm"
 import CommentForm from "../components/CommentForm"
@@ -32,16 +31,16 @@ export default function CodePage() {
 
   return (
     loading ? (
-    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "calc(10vh + 64px)", backgroundColor: "white", minHeight: "100vh" }}>
       <CircularProgress />
     </Container>
     ) : 
     <Container sx={{ 
       borderLeft: 1, 
       borderRight: 1, 
-      pt: 3, 
+      pt: "85px", 
       backgroundColor: "white", 
-      minHeight: "calc(100vh - 64px)" 
+      minHeight: "100vh"
       }}
       >
         <Box

@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import { SNIPPET_BY_ID } from '../utils/queries';
 
-import {Typography, Box, Container, Card, CardContent} from '@mui/material/';
+import {Typography, Box, Container, Card, CardContent, CircularProgress} from '@mui/material/';
 
 import CommentForm from "../components/CommentForm"
 
@@ -24,11 +24,17 @@ export default function CodePage() {
   
   return (
     loading ? (
-    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "10vh", backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+    <Container sx={{ textAlign: "center", borderLeft: 1, borderRight: 1, pt: "calc(10vh + 64px)", backgroundColor: "white", minHeight: "100vh" }}>
       <CircularProgress />
     </Container>
       ) : 
-    <Container sx={{ borderLeft: 1, borderRight: 1, pt: 3, backgroundColor: "white", minHeight: "calc(100vh - 64px)" }}>
+    <Container sx={{ 
+      borderLeft: 1, 
+      borderRight: 1, 
+      pt: "85px", 
+      backgroundColor: "white", 
+      minHeight: "80vh"
+     }}>
       <Box sx={{ margin: 2 }}>
         <Typography color="text.secondary" variant="h2" sx={{textAlign: "center"}} gutterBottom>
           {data.snippetById.name} 
