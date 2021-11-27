@@ -78,11 +78,12 @@ Then it is stored in the database, and displays on the homepage.
 If you have any questions feel free to contact us here:
 
  ##### Github: 
- 
 
  [David Clegg](https://github.com/Cleggatron)
+ [Mel Jack](https://github.com/meljack1/)
 
  ##### Email: 
 
 david.robert.clegg@gmail.com
+mel.jack.developer@gmail.com
 
