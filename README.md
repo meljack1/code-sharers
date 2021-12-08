@@ -81,9 +81,11 @@ If you have any questions feel free to contact us here:
 
  [David Clegg](https://github.com/Cleggatron)
  [Mel Jack](https://github.com/meljack1/)
+ [Mustafa Ali](https://github.com/mus-ali1)
 
  ##### Email: 
 
 david.robert.clegg@gmail.com
 mel.jack.developer@gmail.com
+mustafa_a_ali@outlook.com
 
